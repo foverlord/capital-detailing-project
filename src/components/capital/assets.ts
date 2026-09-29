@@ -11,17 +11,66 @@ import soundproof from "@/assets/process-soundproof.jpg";
 
 export const heroImage = hero;
 
-export const galleryImages = [
-  { src: mustang, title: "Ford Mustang", detail: "Матовая PPF · полный кузов" },
-  { src: bmw, title: "BMW X5", detail: "Защитная плёнка · PPF" },
-  { src: zeekr, title: "Zeekr 001", detail: "PPF · полный кузов" },
-  { src: hyundaiGloss, title: "Hyundai Elantra", detail: "Детейлинг · глянцевая защита" },
-  { src: hyundaiMatte, title: "Hyundai Grandeur", detail: "Матовая защита кузова" },
-  { src: salon, title: "KIA Sportage", detail: "Детейлинг салона" },
-] as const;
+export type GalleryWork = {
+  src: string;
+  title: string;
+  detail: string;
+  alt: string;
+  tags: readonly string[];
+};
+
+/** Labels and tags come from existing gallery copy. No invented models. */
+export const galleryImages: readonly GalleryWork[] = [
+  {
+    src: mustang,
+    title: "Ford Mustang",
+    detail: "Матовая PPF · полный кузов",
+    alt: "Ford Mustang в матовой защитной плёнке, полный кузов",
+    tags: ["Full PPF", "Матовая PPF"],
+  },
+  {
+    src: bmw,
+    title: "BMW X5",
+    detail: "Защитная плёнка · PPF",
+    alt: "BMW X5 после оклейки защитной плёнкой",
+    tags: ["PPF"],
+  },
+  {
+    src: zeekr,
+    title: "Zeekr 001",
+    detail: "PPF · полный кузов",
+    alt: "Zeekr 001 в полной оклейке PPF",
+    tags: ["Full PPF"],
+  },
+  {
+    src: hyundaiGloss,
+    title: "Hyundai Elantra",
+    detail: "Детейлинг · глянцевая защита",
+    alt: "Hyundai Elantra с глянцевой защитой кузова",
+    tags: ["Глянцевая защита"],
+  },
+  {
+    src: hyundaiMatte,
+    title: "Hyundai Grandeur",
+    detail: "Матовая защита кузова",
+    alt: "Hyundai Grandeur в матовой защите кузова",
+    tags: ["Матовая защита"],
+  },
+  {
+    src: salon,
+    title: "KIA Sportage",
+    detail: "Детейлинг салона",
+    alt: "Салон KIA Sportage после детейлинга",
+    tags: ["Салон"],
+  },
+];
 
 export const processImages = [
-  { src: ppfHands, alt: "Монтаж защитной плёнки на кузов автомобиля" },
-  { src: ppfHood, alt: "Оклейка капота защитной плёнкой в Capital Detailing" },
-  { src: soundproof, alt: "Шумо- и виброизоляция пола салона" },
+  { src: ppfHands, alt: "Монтаж защитной плёнки на кузов автомобиля", caption: "Точность монтажа" },
+  {
+    src: ppfHood,
+    alt: "Оклейка капота защитной плёнкой в Capital Detailing",
+    caption: "Чистая технология",
+  },
+  { src: soundproof, alt: "Шумо- и виброизоляция пола салона", caption: "Comfort Mat" },
 ] as const;
