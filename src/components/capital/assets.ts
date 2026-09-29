@@ -12,16 +12,16 @@ import soundproof from "@/assets/process-soundproof.jpg";
 export const heroImage = hero;
 
 export const galleryImages = [
-  { src: mustang, title: "Ford Mustang", detail: "Матовый винил · полный кузов" },
-  { src: bmw, title: "BMW X5", detail: "Защитная плёнка · STEK" },
+  { src: mustang, title: "Ford Mustang", detail: "Матовая PPF · полный кузов" },
+  { src: bmw, title: "BMW X5", detail: "Защитная плёнка · PPF" },
   { src: zeekr, title: "Zeekr 001", detail: "PPF · полный кузов" },
   { src: hyundaiGloss, title: "Hyundai Elantra", detail: "Детейлинг · глянцевая защита" },
-  { src: hyundaiMatte, title: "Hyundai Grandeur", detail: "Матовый стайлинг" },
+  { src: hyundaiMatte, title: "Hyundai Grandeur", detail: "Матовая защита кузова" },
   { src: salon, title: "KIA Sportage", detail: "Детейлинг салона" },
 ] as const;
 
 export const processImages = [
   { src: ppfHands, alt: "Монтаж защитной плёнки на кузов автомобиля" },
   { src: ppfHood, alt: "Оклейка капота защитной плёнкой в Capital Detailing" },
-  { src: soundproof, alt: "Многослойная шумоизоляция Comfort Mat" },
+  { src: soundproof, alt: "Шумо- и виброизоляция пола салона" },
 ] as const;

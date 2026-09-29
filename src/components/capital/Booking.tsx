@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-const services = ["Бронеплёнка PPF", "Премиум тонировка", "Виниловый стайлинг", "Шумоизоляция Premium"];
+const services = ["Полный кузов PPF", "LUX-пакет", "Защита салона", "Лобовое стекло", "Шумоизоляция", "Сетка в радиатор"];
 
 function formatPhone(value: string) {
   const digits = value.replace(/\D/g, "").replace(/^7/, "").slice(0, 10);
