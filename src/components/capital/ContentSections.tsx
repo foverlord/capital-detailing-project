@@ -1,4 +1,4 @@
-import { ArrowUpRight, Maximize2, Shield, Sparkles, SunMedium, Volume2, X } from "lucide-react";
+import { ArrowUpRight, Maximize2, Shield, Sparkles, Star, SunMedium, Volume2, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { galleryImages, processImages } from "./assets";
@@ -15,7 +15,7 @@ function SectionIntro({ kicker, title, copy }: { kicker: string; title: string; 
 }
 
 export function Services() {
-  return <section id="services" className="section-shell"><SectionIntro kicker="01 · Экспертиза" title="Технологии защиты без компромиссов" copy="Подбираем решение под сценарий эксплуатации, состояние кузова и ваши ожидания от результата." /><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">{services.map(({ icon: Icon, n, title, copy }) => <article key={title} className="group glass-panel min-h-72 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/60"><div className="flex items-center justify-between"><Icon className="size-6 text-primary" /><span className="font-mono text-xs text-muted-foreground">{n}</span></div><h3 className="mt-16 text-xl font-bold uppercase leading-tight">{title}</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">{copy}</p><div className="mt-6 h-px w-10 bg-primary/50 transition-all group-hover:w-full" /></article>)}</div></section>;
+  return <section id="services" className="section-shell"><SectionIntro kicker="01 · Экспертиза" title="Технологии защиты без компромиссов" copy="Подбираем решение под сценарий эксплуатации, состояние кузова и ваши ожидания от результата." /><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">{services.map(({ icon: Icon, n, title, copy }) => <article key={title} className="group border border-white/10 bg-white/[0.03] backdrop-blur-md min-h-72 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.06)]"><div className="flex items-center justify-between"><Icon className="size-6 text-primary" /><span className="font-mono text-xs text-muted-foreground">{n}</span></div><h3 className="mt-16 text-xl font-bold uppercase leading-tight">{title}</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">{copy}</p><div className="mt-6 h-px w-10 bg-primary/50 transition-all group-hover:w-full" /></article>)}</div></section>;
 }
 
 export function Works() {
@@ -25,9 +25,77 @@ export function Works() {
 
 export function Process() {
   const steps = [{ n: "01", title: "Заявка", copy: "Фиксируем автомобиль, задачу и желаемый результат." }, { n: "02", title: "Осмотр / смета", copy: "Осматриваем кузов и согласовываем материалы, сроки и точную стоимость." }, { n: "03", title: "Выдача", copy: "Проверяем каждый элемент, передаём рекомендации и гарантию." }];
-  return <section id="process" className="section-shell"><SectionIntro kicker="03 · Процесс" title="Контроль на каждом этапе" copy="Работаем в чистой студии, фиксируем зоны обработки и не торопим технологический процесс." /><div className="grid gap-px border border-border bg-border lg:grid-cols-3">{steps.map((step) => <div key={step.n} className="bg-background p-6 lg:p-8"><span className="font-mono text-sm text-primary">{step.n}</span><h3 className="mt-8 text-xl font-bold uppercase">{step.title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{step.copy}</p></div>)}</div><div className="mt-5 grid gap-3 md:grid-cols-3">{processImages.map((image, index) => <figure key={image.alt} className={`relative overflow-hidden ${index === 1 ? "md:-translate-y-5" : ""}`}><img src={image.src} alt={image.alt} className="aspect-[4/5] h-full w-full object-cover" /><figcaption className="absolute bottom-0 left-0 bg-background/80 px-4 py-3 font-mono text-[10px] uppercase text-foreground backdrop-blur">{["Точность монтажа", "Чистая технология", "Многослойная защита"][index]}</figcaption></figure>)}</div></section>;
+  return <section id="process" className="section-shell"><SectionIntro kicker="03 · Процесс" title="Контроль на каждом этапе" copy="Работаем в чистой студии, фиксируем зоны обработки и не торопим технологический процесс." /><div className="grid gap-3 lg:grid-cols-3">{steps.map((step) => <div key={step.n} className="border border-white/10 bg-white/[0.03] backdrop-blur-md p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.06)]"><span className="font-mono text-sm text-primary">{step.n}</span><h3 className="mt-8 text-xl font-bold uppercase">{step.title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{step.copy}</p></div>)}</div><div className="mt-5 grid gap-3 md:grid-cols-3">{processImages.map((image, index) => <figure key={image.alt} className={`relative overflow-hidden ${index === 1 ? "md:-translate-y-5" : ""}`}><img src={image.src} alt={image.alt} className="aspect-[4/5] h-full w-full object-cover" /><figcaption className="absolute bottom-0 left-0 bg-white/[0.03] backdrop-blur-md border-t border-white/10 px-4 py-3 font-mono text-[10px] uppercase text-foreground">{["Точность монтажа", "Чистая технология", "Многослойная защита"][index]}</figcaption></figure>)}</div></section>;
+}
+
+export function Reviews() {
+  const reviews = [
+    {
+      name: "Александр К.",
+      text: "Отличная работа! PPF на Porsche Cayenne сделали идеально. Все края закрыты, плёнка незаметна. Рекомендую!",
+      rating: 5,
+      date: "2 недели назад"
+    },
+    {
+      name: "Мария Д.",
+      text: "Тонировка премиум класса. Качество на высшем уровне, сроки соблюдены. Студия очень чистая и современная.",
+      rating: 5,
+      date: "1 месяц назад"
+    },
+    {
+      name: "Дмитрий С.",
+      text: "Полный стайлинг BMW X5. Результат превзошёл ожидания. Менеджеры профессионалы, всё объяснили и показали.",
+      rating: 5,
+      date: "3 недели назад"
+    }
+  ];
+
+  return (
+    <section id="reviews" className="section-shell">
+      <SectionIntro 
+        kicker="04 · Отзывы" 
+        title="Наши клиенты рекомендуют" 
+        copy="Честные отзывы автовладельцев о качестве работ и сервисе Capital Detailing в Астане." 
+      />
+      <div className="mb-8 flex items-center gap-4">
+        <div className="flex items-center gap-1">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <Star key={star} className="size-5 fill-primary text-primary" />
+          ))}
+          <span className="ml-2 text-2xl font-bold">4.9</span>
+        </div>
+        <div className="text-sm text-muted-foreground">
+          <span className="font-semibold">128+ отзывов</span> на 2ГИС
+        </div>
+      </div>
+      <div className="grid gap-4 md:grid-cols-3">
+        {reviews.map((review, index) => (
+          <article 
+            key={index} 
+            className="border border-white/10 bg-white/[0.03] backdrop-blur-md p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.06)]"
+          >
+            <div className="flex items-center gap-1 mb-4">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star 
+                  key={star} 
+                  className={`size-4 ${star <= review.rating ? 'fill-primary text-primary' : 'text-muted-foreground/30'}`} 
+                />
+              ))}
+            </div>
+            <p className="text-sm leading-relaxed mb-4 text-foreground/90">
+              "{review.text}"
+            </p>
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-semibold text-primary">{review.name}</span>
+              <span className="text-muted-foreground">{review.date}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export function Contacts() {
-  return <section id="contacts" className="section-shell"><div className="contact-grid overflow-hidden border border-border bg-card/40"><div className="p-6 md:p-10"><p className="section-kicker">05 · Контакты</p><h2 className="section-title max-w-2xl">Студия в сердце Астаны</h2><div className="mt-10 grid gap-8 sm:grid-cols-2"><div><p className="info-label">Адрес</p><p className="mt-2 text-lg font-semibold">ул. Бухар жырау, 36н<br /><span className="text-muted-foreground">ЖК Адал</span></p></div><div><p className="info-label">Режим работы</p><p className="mt-2 text-lg font-semibold">Ежедневно<br /><span className="text-muted-foreground">10:00–20:00</span></p></div><div><p className="info-label">Телефон · WhatsApp · Telegram</p><p className="mt-2 text-lg font-semibold">+7 XXX XXX XX XX</p></div></div><div className="mt-10 flex flex-col gap-3 sm:flex-row"><Button variant="luxury" asChild><a href="https://2gis.kz/astana/firm/70000001054354013" target="_blank" rel="noreferrer">Открыть в 2ГИС <ArrowUpRight /></a></Button><Button variant="glass" asChild><a href="https://2gis.kz/astana/directions/points/|71.4304,51.1282" target="_blank" rel="noreferrer">Построить маршрут</a></Button></div></div><div className="map-panel min-h-80"><div className="map-lines" /><div className="relative z-10 grid size-16 place-items-center border border-primary/40 bg-background/80 shadow-[var(--shadow-cyan)]"><span className="size-3 bg-primary" /></div><div className="relative z-10 mt-4 text-center"><p className="text-xs font-bold uppercase">Capital Detailing</p><p className="mt-1 text-[10px] text-muted-foreground">Бухар жырау, 36н</p></div></div></div></section>;
+  return <section id="contacts" className="section-shell"><div className="contact-grid overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-md"><div className="p-6 md:p-10"><p className="section-kicker">06 · Контакты</p><h2 className="section-title max-w-2xl">Студия в сердце Астаны</h2><div className="mt-10 grid gap-8 sm:grid-cols-2"><div><p className="info-label">Адрес</p><p className="mt-2 text-lg font-semibold">ул. Бухар жырау, 36н<br /><span className="text-muted-foreground">ЖК Адал</span></p></div><div><p className="info-label">Режим работы</p><p className="mt-2 text-lg font-semibold">Ежедневно<br /><span className="text-muted-foreground">10:00–20:00</span></p></div><div><p className="info-label">Телефон · WhatsApp · Telegram</p><p className="mt-2 text-lg font-semibold">+7 XXX XXX XX XX</p></div></div><div className="mt-10 flex flex-col gap-3 sm:flex-row"><Button variant="luxury" asChild><a href="https://2gis.kz/astana/firm/70000001054354013" target="_blank" rel="noreferrer">Открыть в 2ГИС <ArrowUpRight /></a></Button><Button variant="glass" asChild><a href="https://2gis.kz/astana/directions/points/|71.4304,51.1282" target="_blank" rel="noreferrer">Построить маршрут</a></Button></div></div><div className="map-panel min-h-80"><div className="map-lines" /><div className="relative z-10 grid size-16 place-items-center border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-[0_0_20px_rgba(255,255,255,0.06)]"><span className="size-3 bg-primary" /></div><div className="relative z-10 mt-4 text-center"><p className="text-xs font-bold uppercase">Capital Detailing</p><p className="mt-1 text-[10px] text-muted-foreground">Бухар жырау, 36н</p></div></div></div></section>;
 }

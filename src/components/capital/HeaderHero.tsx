@@ -22,7 +22,7 @@ function Brand() {
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/75 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-white/[0.03] backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 lg:px-10">
         <Brand />
         <nav className="hidden items-center gap-8 md:flex" aria-label="Главное меню">
@@ -34,9 +34,9 @@ export function Header() {
         </Button>
       </div>
       {open && (
-        <nav className="border-t border-border bg-background px-5 py-5 md:hidden" aria-label="Мобильное меню">
+        <nav className="border-t border-white/10 bg-white/[0.03] backdrop-blur-md px-5 py-5 md:hidden" aria-label="Мобильное меню">
           <div className="grid gap-1">
-            {nav.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="border-b border-border py-4 text-sm font-semibold uppercase">{label}</a>)}
+            {nav.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)} className="border-b border-white/10 py-4 text-sm font-semibold uppercase">{label}</a>)}
             <Button variant="luxury" className="mt-4 h-12" asChild><a href="#booking" onClick={() => setOpen(false)}>Онлайн расчёт</a></Button>
           </div>
         </nav>
@@ -59,9 +59,9 @@ export function Hero() {
             <Button variant="luxury" size="lg" className="h-13" asChild><a href="#booking">Записаться на расчёт <ArrowDownRight /></a></Button>
             <Button variant="glass" size="lg" className="h-13" asChild><a href="#works">Смотреть работы</a></Button>
           </div>
-          <div className="mt-10 grid max-w-2xl grid-cols-3 border-y border-foreground/15 bg-background/20 backdrop-blur-sm">
+          <div className="mt-10 grid max-w-2xl grid-cols-3 border-y border-white/15 bg-white/[0.03] backdrop-blur-md">
             <div className="py-4 pr-3"><div className="flex items-center gap-1 text-sm font-bold"><Star className="size-3.5 fill-primary text-primary" />4.9</div><p className="mt-1 text-[10px] uppercase text-muted-foreground">128+ отзывов · 2ГИС</p></div>
-            <div className="border-x border-foreground/15 px-3 py-4"><div className="flex items-center gap-1 text-sm font-bold"><ShieldCheck className="size-3.5 text-primary" />5 лет</div><p className="mt-1 text-[10px] uppercase text-muted-foreground">Гарантия на работы</p></div>
+            <div className="border-x border-white/15 px-3 py-4"><div className="flex items-center gap-1 text-sm font-bold"><ShieldCheck className="size-3.5 text-primary" />5 лет</div><p className="mt-1 text-[10px] uppercase text-muted-foreground">Гарантия на работы</p></div>
             <div className="py-4 pl-3"><div className="text-sm font-bold">STEK · SunTek</div><p className="mt-1 text-[10px] uppercase text-muted-foreground">Premium плёнки</p></div>
           </div>
         </div>
