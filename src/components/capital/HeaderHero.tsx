@@ -54,7 +54,7 @@ export function Hero() {
         <div className="max-w-[760px] animate-enter">
           <div className="mb-6 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary"><span className="h-px w-10 bg-primary" /> Astana · Premium car care</div>
           <h1 className="max-w-[730px] text-[clamp(2.5rem,6.5vw,5.8rem)] font-extrabold uppercase leading-[0.9] text-foreground">Защита и эстетика премиальных авто <span className="text-primary">в Астане</span></h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground/75 lg:text-lg">Бронеплёнка, тонировка и шумоизоляция для Porsche, BMW, Zeekr и автомобилей, к которым относятся с особым вниманием.</p>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground/75 lg:text-lg">Оклейка бронеплёнкой, шумоизоляция и защитные сетки для Porsche, BMW, Zeekr и автомобилей, к которым относятся с особым вниманием.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button variant="luxury" size="lg" className="h-13" asChild><a href="#booking">Записаться на расчёт <ArrowDownRight /></a></Button>
             <Button variant="glass" size="lg" className="h-13" asChild><a href="#works">Смотреть работы</a></Button>
@@ -62,7 +62,7 @@ export function Hero() {
           <div className="mt-10 grid max-w-2xl grid-cols-3 border-y border-white/15 bg-white/[0.03] backdrop-blur-md">
             <div className="py-4 pr-3"><div className="flex items-center gap-1 text-sm font-bold"><Star className="size-3.5 fill-primary text-primary" />4.9</div><p className="mt-1 text-[10px] uppercase text-muted-foreground">128+ отзывов · 2ГИС</p></div>
             <div className="border-x border-white/15 px-3 py-4"><div className="flex items-center gap-1 text-sm font-bold"><ShieldCheck className="size-3.5 text-primary" />5 лет</div><p className="mt-1 text-[10px] uppercase text-muted-foreground">Гарантия на работы</p></div>
-            <div className="py-4 pl-3"><div className="text-sm font-bold">STEK · SunTek</div><p className="mt-1 text-[10px] uppercase text-muted-foreground">Premium плёнки</p></div>
+            <div className="py-4 pl-3"><div className="text-sm font-bold">Tytan PPF</div><p className="mt-1 text-[10px] uppercase text-muted-foreground">Полиуретановые плёнки</p></div>
           </div>
         </div>
       </div>

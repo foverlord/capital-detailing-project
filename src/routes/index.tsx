@@ -5,7 +5,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Capital Detailing — премиальный детейлинг в Астане" },
-      { name: "description", content: "Бронеплёнка PPF, премиальная тонировка, виниловый стайлинг и шумоизоляция в Capital Detailing, Астана." },
+      { name: "description", content: "Оклейка бронеплёнкой PPF, защита салона и лобового стекла, шумоизоляция и сетка в радиатор — Capital Detailing, Астана." },
       { property: "og:title", content: "Capital Detailing Astana" },
       { property: "og:description", content: "Защита и эстетика премиальных автомобилей в Астане." },
       { property: "og:type", content: "website" },

@@ -1,13 +1,15 @@
-import { ArrowUpRight, Maximize2, Shield, Sparkles, Star, SunMedium, Volume2, X } from "lucide-react";
+import { ArrowUpRight, Grid3x3, Layers, Maximize2, Monitor, ScanLine, Shield, Star, Volume2, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { galleryImages, processImages } from "./assets";
 
 const services = [
-  { icon: Shield, n: "01", title: "Бронеплёнка PPF", copy: "Прозрачная защита кузова от сколов, реагентов и дорожных рисков. Точные лекала и закрытые края." },
-  { icon: SunMedium, n: "02", title: "Премиум тонировка", copy: "Комфортная температура и приватность без потери обзора. Плёнки SunTek премиальной серии." },
-  { icon: Sparkles, n: "03", title: "Виниловый стайлинг", copy: "Новый характер автомобиля: глубокий глянец, сатин или матовая фактура с чистой геометрией." },
-  { icon: Volume2, n: "04", title: "Шумоизоляция Premium", copy: "Многослойная обработка Comfort Mat для тишины, плотного звука дверей и акустического комфорта." },
+  { icon: Shield, n: "01", title: "Полный кузов PPF", copy: "Полная оклейка кузова глянцевыми и матовыми или сатиновыми полиуретановыми плёнками, например Tytan PPF. Точные лекала и закрытые края." },
+  { icon: Layers, n: "02", title: "LUX · зоны риска", copy: "Пакеты на уязвимые зоны: капот, передний бампер, крылья, фары, стойки, полоса на крышу, зеркала, кантики и зоны под ручками." },
+  { icon: Monitor, n: "03", title: "Защита салона", copy: "Плёнка на экраны и мониторы, пластик, дверные карты и пороги — салон остаётся без царапин в ежедневной эксплуатации." },
+  { icon: ScanLine, n: "04", title: "Лобовое стекло", copy: "Защита лобового стекла от сколов и пескоструя." },
+  { icon: Volume2, n: "05", title: "Шумоизоляция", copy: "Комплексная или поэлементная шумо- и виброизоляция салона." },
+  { icon: Grid3x3, n: "06", title: "Сетка в радиатор", copy: "Установка защитной сетки в радиатор от камней и дорожного мусора." },
 ] as const;
 
 function SectionIntro({ kicker, title, copy }: { kicker: string; title: string; copy?: string }) {
@@ -15,7 +17,7 @@ function SectionIntro({ kicker, title, copy }: { kicker: string; title: string; 
 }
 
 export function Services() {
-  return <section id="services" className="section-shell"><SectionIntro kicker="01 · Экспертиза" title="Технологии защиты без компромиссов" copy="Подбираем решение под сценарий эксплуатации, состояние кузова и ваши ожидания от результата." /><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">{services.map(({ icon: Icon, n, title, copy }) => <article key={title} className="group border border-white/10 bg-white/[0.03] backdrop-blur-md min-h-72 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.06)]"><div className="flex items-center justify-between"><Icon className="size-6 text-primary" /><span className="font-mono text-xs text-muted-foreground">{n}</span></div><h3 className="mt-16 text-xl font-bold uppercase leading-tight">{title}</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">{copy}</p><div className="mt-6 h-px w-10 bg-primary/50 transition-all group-hover:w-full" /></article>)}</div></section>;
+  return <section id="services" className="section-shell"><SectionIntro kicker="01 · Экспертиза" title="Технологии защиты без компромиссов" copy="Оклейка бронеплёнкой, шумоизоляция и защитные сетки — под сценарий эксплуатации и состояние автомобиля." /><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">{services.map(({ icon: Icon, n, title, copy }) => <article key={title} className="group border border-white/10 bg-white/[0.03] backdrop-blur-md min-h-72 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.06)]"><div className="flex items-center justify-between"><Icon className="size-6 text-primary" /><span className="font-mono text-xs text-muted-foreground">{n}</span></div><h3 className="mt-16 text-xl font-bold uppercase leading-tight">{title}</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">{copy}</p><div className="mt-6 h-px w-10 bg-primary/50 transition-all group-hover:w-full" /></article>)}</div></section>;
 }
 
 export function Works() {
@@ -38,13 +40,13 @@ export function Reviews() {
     },
     {
       name: "Мария Д.",
-      text: "Тонировка премиум класса. Качество на высшем уровне, сроки соблюдены. Студия очень чистая и современная.",
+      text: "Шумоизоляцию сделали аккуратно: в салоне заметно тише, сроки соблюдены. Студия очень чистая и современная.",
       rating: 5,
       date: "1 месяц назад"
     },
     {
       name: "Дмитрий С.",
-      text: "Полный стайлинг BMW X5. Результат превзошёл ожидания. Менеджеры профессионалы, всё объяснили и показали.",
+      text: "LUX-пакет на BMW X5 закрыл капот, бампер и фары. Результат превзошёл ожидания. Менеджеры профессионалы, всё объяснили и показали.",
       rating: 5,
       date: "3 недели назад"
     }
