@@ -5,7 +5,7 @@ import { studio } from "./site";
 
 export function Contacts() {
   return (
-    <section id="contacts" className="scroll-mt-20 border-t border-zinc-800/80">
+    <section id="contacts" className="border-t border-zinc-800/80">
       <FadeIn className="mx-auto grid max-w-6xl gap-8 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">

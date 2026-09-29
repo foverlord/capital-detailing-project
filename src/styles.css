@@ -149,7 +149,7 @@
     min-width: 320px;
   }
 
-  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
   button, a, input, textarea, select { letter-spacing: 0; }
   ::selection { background: var(--primary); color: var(--primary-foreground); }
 }

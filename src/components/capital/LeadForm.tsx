@@ -76,7 +76,7 @@ export function LeadForm() {
   };
 
   return (
-    <section id="booking" className="scroll-mt-20 border-y border-zinc-800/80 bg-zinc-950">
+    <section id="booking" className="border-y border-zinc-800/80 bg-zinc-950">
       <FadeIn className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div className="flex flex-col gap-4">
           <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-500">

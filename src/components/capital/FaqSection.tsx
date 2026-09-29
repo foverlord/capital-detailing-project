@@ -28,7 +28,7 @@ const items = [
 
 export function FaqSection() {
   return (
-    <section id="faq" className="scroll-mt-20 border-t border-zinc-800/80">
+    <section id="faq" className="border-t border-zinc-800/80">
       <FadeIn className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-[0.8fr_1.2fr]">
         <SectionHeading eyebrow="Вопросы" title="Коротко о плёнке и сроках" />
         <Accordion type="single" collapsible className="border-t border-zinc-800/80">

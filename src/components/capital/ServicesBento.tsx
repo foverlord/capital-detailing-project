@@ -44,7 +44,7 @@ const services: readonly ServiceCard[] = [
 
 export function ServicesBento() {
   return (
-    <section id="services" className="scroll-mt-20">
+    <section id="services">
       <FadeIn className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-16 md:px-6 md:py-24">
         <SectionHeading
           eyebrow="Услуги"

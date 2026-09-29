@@ -12,7 +12,7 @@ import { StickyBar } from "./StickyBar";
 export function LandingPage() {
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen bg-zinc-950 pb-24 text-zinc-100 md:pb-0">
+      <div className="min-h-screen bg-zinc-950 pb-28 text-zinc-100 md:pb-0">
         <Navbar />
         <main>
           <Hero />

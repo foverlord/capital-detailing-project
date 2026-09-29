@@ -23,7 +23,7 @@ export function Hero() {
         className="pointer-events-none absolute -left-16 top-24 size-72 rounded-full bg-zinc-100/[0.06] blur-3xl"
       />
 
-      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl items-end px-4 pb-12 pt-16 md:items-center md:px-6 md:pb-16">
+      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl items-end px-4 pb-28 pt-16 md:items-center md:px-6 md:pb-16">
         <div className="max-w-xl">
           <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-300">
             {studio.city} · премиальный детейлинг

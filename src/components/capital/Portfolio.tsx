@@ -15,7 +15,7 @@ export function Portfolio() {
   const [active, setActive] = useState<GalleryWork | null>(null);
 
   return (
-    <section id="works" className="scroll-mt-20 border-t border-zinc-800/80">
+    <section id="works" className="border-t border-zinc-800/80">
       <FadeIn className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-16 md:px-6 md:py-24">
         <SectionHeading
           eyebrow="Работы"
