@@ -1,14 +1,51 @@
-# Welcome to your Lovable project
+# Capital Detailing Project
+
+Build a single-page ultra-luxury automotive detailing landing for **Capital Detailing** (Astana). Dark Porsche-center / stealth garage vibe. Use ONLY the attached real photos (do not invent stock cars).
+
+## Brand & facts
+- Name: CAPITAL DETAILING
+- One branch: ул. Бухар жырау, 36н (ЖК Адал), Astana
+- Hours: ежедневно 10:00–20:00
+- Phone / WhatsApp / Telegram: placeholders (+7 XXX XXX XX XX)
+- Trust: 4.9★ / 128+ отзывов 2ГИС; гарантия 5 лет; плёнки STEK & SunTek Premium
+- Language: Russian UI
+- No before/after slider. Use a **Works gallery** + **Process** photos instead.
+
+## Visual system
+- BG: #08090C / #0F1117
+- Glass cards: zinc-900/40 backdrop-blur border white/10
+- Accent: electric cyan #00F0FF subtle glow (not neon carnival)
+- Text: zinc-100 / zinc-400
+- Bold uppercase headlines, tight tracking, Inter or Plus Jakarta Sans
+- Mobile-first, polished, dealer-site quality — not a generic template
+
+## Photo usage (attached files)
+1. **hero-gwagen.png** — HERO background only (matte G-Class, full car). Put headline + CTAs on the LEFT empty space; do not cover the car face/headlight.
+2. Gallery: mustang, bmw studio, zeekr studio, hyundai gloss, hyundai matte street, salon interior with CD bottle
+3. Process: ppf hands (squeegee), ppf hood with Capital sign, soundproofing Comfort Mat floor
+
+## Sections (one page)
+1. Sticky glass header: logo CAPITAL DETAILING, anchors Услуги / Работы / Процесс / Контакты, CTA «Онлайн расчёт»
+2. Hero: headline «ЗАЩИТА И ЭСТЕТИКА ПРЕМИАЛЬНЫХ АВТО В АСТАНЕ»; sub about PPF, тонировка, шумоизоляция for Porsche/BMW/Zeekr; trust badges; CTAs «Записаться на расчёт» + «Смотреть работы»
+3. Services grid (4 glass cards, cyan border on hover): Бронеплёнка PPF; Премиум тонировка; Виниловый стайлинг; Шумоизоляция Premium — short Russian blurbs
+4. Works gallery: attached finished-car photos in a refined grid (no fake before/after)
+5. Process: 01 Заявка → 02 Осмотр/смета → 03 Выдача + show the 3 process photos
+6. Booking form (concierge style): имя, телефон +7 mask, марка/модель, service pills (4), филиал select (only Адал address), photo upload placeholder UI (no real backend yet), comment; submit «Получить детальный расчёт» → for now toast/success UI only (Telegram/Supabase later)
+7. Contacts/map card: address, hours, buttons «Открыть в 2ГИС» linking https://2gis.kz/astana/firm/70000001054354013 and «Построить маршрут»; dark map placeholder ok
+8. Footer: © Capital Detailing Astana · Digital experience by Amir
+
+## Stack notes
+Use Lovable default (React + Tailwind + shadcn). Modular section components. Keep v1 focused and elegant — polish over feature bloat.
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/e853d459-45b5-4ee7-897c-0d6e0f191e74).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +57,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
