@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project decisions
+
+- Use section-level React components for the landing page so each content band stays focused and maintainable.
+- Keep all Capital Detailing media as Lovable Assets pointers so original binary uploads do not enter the repository.
