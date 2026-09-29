@@ -12,4 +12,4 @@
 ## Project decisions
 
 - Use section-level React components for the landing page so each content band stays focused and maintainable.
-- Keep all Capital Detailing media as Lovable Assets pointers so original binary uploads do not enter the repository.
+- Keep Capital Detailing photos as real image binaries in `src/assets/` so Vite and Vercel can serve them. Do not replace those photos with Lovable `*.asset.json` pointers.
