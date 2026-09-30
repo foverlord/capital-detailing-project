@@ -34,11 +34,12 @@ export const bodyClasses = [
   { id: "suv", label: "SUV / Van" },
 ] as const;
 
-/** Lead packages aligned with services already offered on the site. */
+/** Same four services as the bento. Not a price list. */
 export const leadPackages = [
-  { id: "front", label: "Зона риска (перед)" },
-  { id: "full", label: "Полный кузов (Full PPF)" },
-  { id: "salon", label: "Защита салона" },
+  { id: "ppf", label: "Бронеплёнка PPF" },
+  { id: "tint", label: "Премиум тонировка" },
+  { id: "vinyl", label: "Виниловый стайлинг" },
+  { id: "sound", label: "Шумоизоляция Comfort Mat" },
 ] as const;
 
 export type BodyClassId = (typeof bodyClasses)[number]["id"];

@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "./FadeIn";
+import { Accent } from "./SectionHeading";
 import { studio } from "./site";
 
 export function Contacts() {
@@ -13,7 +14,7 @@ export function Contacts() {
               Контакты
             </p>
             <h2 className="text-[1.75rem] font-semibold leading-tight tracking-tight text-zinc-100 md:text-4xl">
-              Студия в Астане
+              Студия в <Accent>Астане</Accent>
             </h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2">

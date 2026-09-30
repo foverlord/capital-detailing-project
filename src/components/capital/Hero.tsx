@@ -1,6 +1,7 @@
 import { ArrowDownRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { heroImage } from "./assets";
+import { Accent } from "./SectionHeading";
 import { studio } from "./site";
 
 const badges = [
@@ -24,12 +25,12 @@ export function Hero() {
       />
 
       <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl items-end px-4 pb-28 pt-16 md:items-center md:px-6 md:pb-16">
-        <div className="max-w-xl">
+        <div className="max-w-3xl">
           <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-300">
             {studio.city} · премиальный детейлинг
           </p>
-          <h1 className="mt-4 text-[2.15rem] font-bold leading-[1.05] tracking-tight text-zinc-100 sm:text-5xl md:text-[3.4rem]">
-            Защита и эстетика премиальных авто в Астане
+          <h1 className="mt-4 text-[clamp(2.5rem,6.4vw,5.4rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.035em] text-zinc-100">
+            Защита и эстетика <Accent>премиальных</Accent> авто в Астане
           </h1>
           <p className="mt-5 max-w-md text-base leading-relaxed text-zinc-300">
             Оклейка PPF, полировка и шумоизоляция для Porsche, BMW, Zeekr и др.
@@ -47,7 +48,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <dl className="mt-10 grid grid-cols-3 border border-zinc-800/80 bg-zinc-950/50 backdrop-blur-md">
+          <dl className="mt-10 grid max-w-2xl grid-cols-3 border border-zinc-800/80 bg-zinc-950/50 backdrop-blur-md">
             {badges.map((badge) => (
               <div key={badge.label} className="px-3 py-3 md:px-4 md:py-4">
                 <dt className="text-[10px] uppercase tracking-[0.14em] text-zinc-500">

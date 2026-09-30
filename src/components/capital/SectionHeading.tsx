@@ -1,6 +1,13 @@
+import type { ReactNode } from "react";
+
+/** Warm platinum. Reads on zinc-950 without a blue or cyan cast. */
+export function Accent({ children }: { children: ReactNode }) {
+  return <span className="text-[#d6c4a8]">{children}</span>;
+}
+
 type SectionHeadingProps = {
   eyebrow: string;
-  title: string;
+  title: ReactNode;
   copy?: string;
 };
 

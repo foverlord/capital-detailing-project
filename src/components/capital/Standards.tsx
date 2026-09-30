@@ -1,6 +1,6 @@
 import { processImages } from "./assets";
 import { FadeIn } from "./FadeIn";
-import { SectionHeading } from "./SectionHeading";
+import { Accent, SectionHeading } from "./SectionHeading";
 
 const points = [
   {
@@ -27,7 +27,11 @@ export function Standards() {
       <FadeIn className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-16 md:px-6 md:py-24">
         <SectionHeading
           eyebrow="Студия"
-          title="Как принимаем автомобиль"
+          title={
+            <>
+              Как принимаем <Accent>автомобиль</Accent>
+            </>
+          }
           copy="Четыре правила, по которым идёт каждая машина в Астане."
         />
         <ol className="grid grid-cols-1 gap-3 md:grid-cols-2">

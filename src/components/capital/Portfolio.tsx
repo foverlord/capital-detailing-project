@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { galleryImages, type GalleryWork } from "./assets";
 import { FadeIn } from "./FadeIn";
-import { SectionHeading } from "./SectionHeading";
+import { Accent, SectionHeading } from "./SectionHeading";
 
 export function Portfolio() {
   const [active, setActive] = useState<GalleryWork | null>(null);
@@ -19,8 +19,11 @@ export function Portfolio() {
       <FadeIn className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-16 md:px-6 md:py-24">
         <SectionHeading
           eyebrow="Работы"
-          title="Автомобили из студии"
-          copy="Реальные машины Capital Detailing в Астане. Без фильтров по марке и без постановочных пар «до / после»."
+          title={
+            <>
+              Автомобили из <Accent>студии</Accent>
+            </>
+          }
         />
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {galleryImages.map((work) => (

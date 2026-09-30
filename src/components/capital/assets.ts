@@ -11,6 +11,14 @@ import soundproof from "@/assets/process-soundproof.jpg";
 
 export const heroImage = hero;
 
+/** Existing studio photos used to fill the service cards. */
+export const servicePhotos = {
+  ppf: mustang,
+  tint: zeekr,
+  vinyl: hyundaiMatte,
+  sound: soundproof,
+} as const;
+
 export type GalleryWork = {
   src: string;
   title: string;

@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FadeIn } from "./FadeIn";
-import { SectionHeading } from "./SectionHeading";
+import { Accent, SectionHeading } from "./SectionHeading";
 
 const items = [
   {
@@ -30,7 +30,14 @@ export function FaqSection() {
   return (
     <section id="faq" className="border-t border-zinc-800/80">
       <FadeIn className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-[0.8fr_1.2fr]">
-        <SectionHeading eyebrow="Вопросы" title="Коротко о плёнке и сроках" />
+        <SectionHeading
+          eyebrow="Вопросы"
+          title={
+            <>
+              Коротко о <Accent>плёнке</Accent> и сроках
+            </>
+          }
+        />
         <Accordion type="single" collapsible className="border-t border-zinc-800/80">
           {items.map((item) => (
             <AccordionItem key={item.q} value={item.q} className="border-zinc-800/80">

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { FadeIn } from "./FadeIn";
+import { Accent } from "./SectionHeading";
 import { bodyClasses, leadPackages, saveLead, type BodyClassId, type LeadPackageId } from "./site";
 
 type FormErrors = {
@@ -83,7 +84,7 @@ export function LeadForm() {
             Заявка
           </p>
           <h2 className="text-[1.75rem] font-semibold leading-tight tracking-tight text-zinc-100 md:text-4xl">
-            Онлайн расчёт
+            Онлайн <Accent>расчёт</Accent>
           </h2>
           <p className="max-w-md text-sm leading-7 text-zinc-400 md:text-base">
             Это не калькулятор с фиксированной ценой. Оставьте класс кузова, пакет и телефон —
