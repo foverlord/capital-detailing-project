@@ -1,60 +1,58 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { navLinks } from "./site";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-
   const close = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-lg">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
+    <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#101115]/95 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-14">
         <a href="#top" className="flex min-w-0 items-center gap-2.5" onClick={close}>
-          <span className="grid size-9 shrink-0 place-items-center border border-zinc-600 text-[11px] font-bold tracking-wide text-zinc-100">
+          <span className="grid size-8 shrink-0 place-items-center rounded-md border border-zinc-500/80 text-[10px] font-semibold tracking-wide text-zinc-100">
             CD
           </span>
-          <span className="truncate text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-100 sm:text-xs sm:tracking-[0.16em]">
+          <span className="truncate text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-100">
             CD Capital Detailing
           </span>
         </a>
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Главное меню">
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Главное меню">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-zinc-400 transition-colors hover:text-zinc-100"
+              className="text-sm text-zinc-300 transition-colors hover:text-white"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <Button variant="luxury" asChild className="min-h-11 px-5">
-            <a href="#booking">Онлайн расчёт</a>
-          </Button>
-        </div>
+        <a
+          href="#booking"
+          className="hidden min-h-10 items-center rounded-full bg-white px-5 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-100 md:inline-flex"
+        >
+          Онлайн расчет
+        </a>
 
-        <Button
-          variant="ghost"
-          size="icon"
-          className="size-11 text-zinc-100 md:hidden"
+        <button
+          type="button"
+          className="grid size-11 place-items-center text-zinc-100 md:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Закрыть меню" : "Открыть меню"}
         >
-          {open ? <X /> : <Menu />}
-        </Button>
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
       </div>
 
       {open ? (
         <nav
           id="mobile-nav"
-          className="border-t border-zinc-800/80 px-4 py-3 md:hidden"
+          className="border-t border-white/[0.06] px-5 py-3 md:hidden"
           aria-label="Мобильное меню"
         >
           <div className="flex flex-col">
@@ -63,16 +61,18 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={close}
-                className="flex min-h-12 items-center border-b border-zinc-800/80 text-sm text-zinc-100"
+                className="flex min-h-12 items-center border-b border-white/[0.06] text-sm text-zinc-100"
               >
                 {link.label}
               </a>
             ))}
-            <Button variant="luxury" asChild className="mt-4 min-h-12">
-              <a href="#booking" onClick={close}>
-                Онлайн расчёт
-              </a>
-            </Button>
+            <a
+              href="#booking"
+              onClick={close}
+              className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-white px-5 text-sm font-medium text-zinc-950"
+            >
+              Онлайн расчет
+            </a>
           </div>
         </nav>
       ) : null}
