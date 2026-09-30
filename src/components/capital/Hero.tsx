@@ -28,7 +28,7 @@ export function Hero() {
           <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-300">
             {studio.city} · премиальный детейлинг
           </p>
-          <h1 className="mt-4 text-[2.15rem] font-semibold leading-[1.05] tracking-tight text-zinc-100 sm:text-5xl md:text-[3.4rem]">
+          <h1 className="mt-4 text-[2.15rem] font-bold leading-[1.05] tracking-tight text-zinc-100 sm:text-5xl md:text-[3.4rem]">
             Защита и эстетика премиальных авто в Астане
           </h1>
           <p className="mt-5 max-w-md text-base leading-relaxed text-zinc-300">

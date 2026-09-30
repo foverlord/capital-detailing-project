@@ -11,12 +11,13 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
-        <a
-          href="#top"
-          className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-100 sm:text-xs sm:tracking-[0.18em]"
-          onClick={close}
-        >
-          CD Capital Detailing
+        <a href="#top" className="flex min-w-0 items-center gap-2.5" onClick={close}>
+          <span className="grid size-9 shrink-0 place-items-center border border-zinc-600 text-[11px] font-bold tracking-wide text-zinc-100">
+            CD
+          </span>
+          <span className="truncate text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-100 sm:text-xs sm:tracking-[0.16em]">
+            CD Capital Detailing
+          </span>
         </a>
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Главное меню">
