@@ -1,4 +1,3 @@
-import hero from "@/assets/hero-gwagen.png";
 import heroLights from "@/assets/hero-spotlights.png";
 import heroCar from "@/assets/hero-car.png";
 import mustang from "@/assets/gallery-mustang.jpg";
@@ -11,7 +10,6 @@ import ppfHands from "@/assets/process-ppf-hands.jpg";
 import ppfHood from "@/assets/process-ppf-hood.jpg";
 import soundproof from "@/assets/process-soundproof.jpg";
 
-export const heroImage = hero;
 export const heroLightsImage = heroLights;
 export const heroCarImage = heroCar;
 
