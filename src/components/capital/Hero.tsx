@@ -79,15 +79,15 @@ export function Hero() {
           </dl>
         </div>
 
-        <div className="flex min-w-0 flex-col items-center">
-          <div className="w-full">
+        <div className="flex min-w-0 flex-col items-center bg-[#101115]">
+          <div className="w-full bg-[#101115]">
             <img
               src={heroLightsImage}
               alt="Четыре прожектора над автомобилем"
-              className="h-auto w-full mix-blend-screen"
+              className="h-auto w-full"
             />
           </div>
-          <div className="mt-6 w-full bg-black sm:mt-8 lg:mt-8">
+          <div className="mt-6 w-full bg-[#101115] sm:mt-8 lg:mt-8">
             <img src={heroCarImage} alt="Чёрный Mercedes-Benz G-Class" className="h-auto w-full" />
           </div>
         </div>

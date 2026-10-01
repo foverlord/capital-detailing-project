@@ -1,4 +1,4 @@
-﻿import heroLights from "@/assets/hero-spotlights.png";
+import heroLights from "@/assets/hero-spotlights.png";
 import heroCar from "@/assets/hero-car.png";
 import mustang from "@/assets/gallery-mustang.jpg";
 import bmw from "@/assets/gallery-bmw.jpg";
