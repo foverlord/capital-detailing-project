@@ -1,5 +1,5 @@
 import hero from "@/assets/hero-gwagen.png";
-import heroSign from "@/assets/hero-sign-black.jpg";
+import heroLights from "@/assets/hero-spotlights.jpg";
 import heroCar from "@/assets/hero-car.png";
 import mustang from "@/assets/gallery-mustang.jpg";
 import bmw from "@/assets/gallery-bmw.jpg";
@@ -12,7 +12,7 @@ import ppfHood from "@/assets/process-ppf-hood.jpg";
 import soundproof from "@/assets/process-soundproof.jpg";
 
 export const heroImage = hero;
-export const heroSignImage = heroSign;
+export const heroLightsImage = heroLights;
 export const heroCarImage = heroCar;
 
 /** Existing studio photos used to fill the service cards. */

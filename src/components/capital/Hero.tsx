@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { heroCarImage, heroSignImage } from "./assets";
+import { heroCarImage, heroLightsImage } from "./assets";
 
 const trust = [
   { label: "2ГИС", value: "4.9" },
@@ -57,8 +57,8 @@ export function Hero() {
         <div className="flex min-w-0 flex-col items-center">
           <div className="w-[78%] bg-black lg:w-[68%]">
             <img
-              src={heroSignImage}
-              alt="Вывеска Capital Detailing и прожекторы"
+              src={heroLightsImage}
+              alt="Четыре прожектора над автомобилем"
               className="h-auto w-full"
             />
           </div>
