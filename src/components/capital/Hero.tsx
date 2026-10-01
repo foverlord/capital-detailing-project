@@ -1,31 +1,40 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield, Star } from "lucide-react";
 import { heroCarImage, heroLightsImage } from "./assets";
 
-const trust = [
-  { label: "2ГИС", value: "4.9" },
-  { label: "Гарантия", value: "5 лет" },
-  { label: "Плёнки студии", value: "STEK / SunTek" },
-] as const;
+const starFills = ["w-full", "w-full", "w-full", "w-full", "w-[90%]"] as const;
+
+function RatingStars() {
+  return (
+    <span className="inline-flex shrink-0 gap-px" aria-hidden="true">
+      {starFills.map((fill, index) => (
+        <span key={index} className="relative size-2.5 sm:size-3">
+          <Star className="size-2.5 text-[#d0b898]/35 sm:size-3" strokeWidth={1.5} />
+          <span className={`absolute inset-y-0 left-0 overflow-hidden ${fill}`}>
+            <Star className="size-2.5 fill-[#d0b898] text-[#d0b898] sm:size-3" strokeWidth={1.5} />
+          </span>
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export function Hero() {
   return (
     <section id="top" className="bg-[#101115]">
       <div className="mx-auto grid max-w-[1440px] items-start gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:gap-6 lg:px-14 lg:py-8">
-        <div className="@container min-w-0">
+        <div className="@container min-w-0 lg:pt-32">
           <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-400">
-            Астана · премиальный детейлинг
+            Астана · студия защиты авто
           </p>
           <h1 className="mt-5 font-display text-[clamp(2.05rem,12cqw,5.15rem)] font-black uppercase leading-[0.86] tracking-[-0.045em] text-white">
             Защита и
             <br />
-            эстетика
-            <br />
-            <span className="text-[#d0b898]">премиальных</span>
+            <span className="text-[#d0b898]">эстетика</span>
             <br />
             авто в Астане
           </h1>
           <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-400">
-            Оклейка PPF, полировка и шумоизоляция для Porsche, BMW, Zeekr и др.
+            Оклейка PPF, полировка и шумоизоляция — от городских седанов до кроссоверов и спорткаров
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
@@ -43,14 +52,30 @@ export function Hero() {
             </a>
           </div>
           <dl className="mt-10 grid max-w-xl grid-cols-3 divide-x divide-white/10 overflow-hidden rounded-2xl border border-white/10">
-            {trust.map((item) => (
-              <div key={item.label} className="px-3 py-4 sm:px-5">
-                <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
-                  {item.label}
-                </dt>
-                <dd className="mt-1 text-base font-medium text-white sm:text-lg">{item.value}</dd>
-              </div>
-            ))}
+            <div className="px-2 py-4 sm:px-5">
+              <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+                2ГИС
+              </dt>
+              <dd className="mt-1 flex items-center gap-1.5 text-base font-medium text-white sm:text-lg">
+                <span>4.9</span>
+                <RatingStars />
+              </dd>
+            </div>
+            <div className="px-2 py-4 sm:px-5">
+              <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+                Гарантия
+              </dt>
+              <dd className="mt-1 flex items-center gap-1.5 text-base font-medium text-white sm:text-lg">
+                <Shield className="size-4 shrink-0 text-[#d0b898]" strokeWidth={1.5} aria-hidden />
+                <span>5 лет</span>
+              </dd>
+            </div>
+            <div className="px-2 py-4 sm:px-5">
+              <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+                Плёнки студии
+              </dt>
+              <dd className="mt-1 text-base font-medium text-white sm:text-lg">STEK / SunTek</dd>
+            </div>
           </dl>
         </div>
 
@@ -62,7 +87,7 @@ export function Hero() {
               className="h-auto w-full"
             />
           </div>
-          <div className="mt-8 w-full bg-black sm:mt-10 lg:mt-14">
+          <div className="mt-6 w-full bg-black sm:mt-8 lg:mt-8">
             <img src={heroCarImage} alt="Чёрный Mercedes-Benz G-Class" className="h-auto w-full" />
           </div>
         </div>
