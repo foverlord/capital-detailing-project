@@ -1,5 +1,5 @@
 import hero from "@/assets/hero-gwagen.png";
-import heroSign from "@/assets/hero-sign.png";
+import heroSign from "@/assets/hero-sign-black.jpg";
 import heroCar from "@/assets/hero-car.png";
 import mustang from "@/assets/gallery-mustang.jpg";
 import bmw from "@/assets/gallery-bmw.jpg";
