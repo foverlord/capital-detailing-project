@@ -20,7 +20,7 @@ function RatingStars() {
 
 export function Hero() {
   return (
-    <section id="top" className="bg-[#000]">
+    <section id="top" className="bg-[#101115]">
       <div className="mx-auto grid max-w-[1440px] items-start gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:gap-6 lg:px-14 lg:py-8">
         <div className="@container min-w-0 lg:pt-32">
           <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-400">
