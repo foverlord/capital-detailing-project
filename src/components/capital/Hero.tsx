@@ -62,11 +62,9 @@ export function Hero() {
               className="h-auto w-full"
             />
           </div>
-          <img
-            src={heroCarImage}
-            alt="Чёрный Mercedes-Benz G-Class"
-            className="mt-8 h-auto w-full object-contain sm:mt-10 lg:mt-14"
-          />
+          <div className="mt-8 w-full bg-black sm:mt-10 lg:mt-14">
+            <img src={heroCarImage} alt="Чёрный Mercedes-Benz G-Class" className="h-auto w-full" />
+          </div>
         </div>
       </div>
     </section>
