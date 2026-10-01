@@ -55,7 +55,7 @@ export function Hero() {
         </div>
 
         <div className="flex min-w-0 flex-col items-center">
-          <div className="w-[78%] bg-black lg:w-[68%]">
+          <div className="w-full bg-black">
             <img
               src={heroLightsImage}
               alt="Четыре прожектора над автомобилем"
