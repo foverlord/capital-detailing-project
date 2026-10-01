@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { heroSceneImage } from "./assets";
+import { heroCarImage, heroSignImage } from "./assets";
 
 const trust = [
   { label: "2ГИС", value: "4.9" },
@@ -10,12 +10,12 @@ const trust = [
 export function Hero() {
   return (
     <section id="top" className="bg-[#101115]">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6 lg:px-14 lg:py-8">
-        <div className="max-w-[40rem]">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:gap-6 lg:px-14 lg:py-8">
+        <div className="@container min-w-0">
           <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-400">
             Астана · премиальный детейлинг
           </p>
-          <h1 className="mt-5 font-display text-[clamp(2.65rem,6vw,5.6rem)] font-black uppercase leading-[0.86] tracking-[-0.045em] text-white">
+          <h1 className="mt-5 font-display text-[clamp(1.9rem,11.2cqw,4.65rem)] font-black uppercase leading-[0.86] tracking-[-0.045em] text-white">
             Защита и
             <br />
             эстетика
@@ -54,11 +54,16 @@ export function Hero() {
           </dl>
         </div>
 
-        <div className="relative">
+        <div className="flex min-w-0 flex-col">
           <img
-            src={heroSceneImage}
-            alt="Чёрный Mercedes-Benz G-Class под вывеской Capital Detailing"
-            className="h-auto w-full object-contain"
+            src={heroSignImage}
+            alt="Вывеска Capital Detailing и прожекторы"
+            className="relative z-10 h-auto w-full object-contain"
+          />
+          <img
+            src={heroCarImage}
+            alt="Чёрный Mercedes-Benz G-Class"
+            className="relative z-0 mt-3 h-auto w-full object-contain lg:-mt-8"
           />
         </div>
       </div>
