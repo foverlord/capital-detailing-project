@@ -35,17 +35,7 @@ Build a single-page ultra-luxury automotive detailing landing for **Capital Deta
 8. Footer: © Capital Detailing Astana · Digital experience by Amir
 
 ## Stack notes
-Use Lovable default (React + Tailwind + shadcn). Modular section components. Keep v1 focused and elegant — polish over feature bloat.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/e853d459-45b5-4ee7-897c-0d6e0f191e74).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+React + Tailwind + shadcn, on Vite and TanStack Start. Modular section components. Keep v1 focused and elegant — polish over feature bloat.
 
 ## Development
 
