@@ -31,15 +31,19 @@ export const navLinks = [
 export const bodyClasses = [
   { id: "sedan", label: "Седан" },
   { id: "crossover", label: "Кроссовер" },
-  { id: "suv", label: "SUV / Van" },
+  { id: "suv", label: "Внедорожник" },
 ] as const;
 
-/** Same four services as the bento. Not a price list. */
+/** Same eight services as the services block. Not a price list. */
 export const leadPackages = [
-  { id: "ppf", label: "Бронеплёнка PPF" },
-  { id: "tint", label: "Премиум тонировка" },
-  { id: "vinyl", label: "Виниловый стайлинг" },
-  { id: "sound", label: "Шумоизоляция Comfort Mat" },
+  { id: "ppf", label: "Антигравийная плёнка" },
+  { id: "film", label: "Тонировка и оклейка плёнкой" },
+  { id: "windshield", label: "Защита лобового стекла" },
+  { id: "polish", label: "Полировка кузова" },
+  { id: "pdr", label: "Удаление вмятин без покраски" },
+  { id: "interior", label: "Детейлинг-химчистка салона" },
+  { id: "sound", label: "Шумоизоляция салона" },
+  { id: "restore", label: "Реставрация и уход за интерьером" },
 ] as const;
 
 export type BodyClassId = (typeof bodyClasses)[number]["id"];

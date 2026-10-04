@@ -87,8 +87,12 @@ export function Hero() {
               className="h-auto w-full"
             />
           </div>
-          <div className="mt-6 w-full bg-[#101115] sm:mt-8 lg:mt-8">
-            <img src={heroCarImage} alt="Чёрный Mercedes-Benz G-Class" className="h-auto w-full" />
+          <div className="mt-2 w-full bg-[#101115]">
+            <img
+              src={heroCarImage}
+              alt="Чёрный Mercedes-Benz G-Class"
+              className="h-auto w-[107%]"
+            />
           </div>
         </div>
       </div>

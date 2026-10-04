@@ -6,20 +6,8 @@ import zeekr from "@/assets/gallery-zeekr.jpg";
 import hyundaiGloss from "@/assets/gallery-hyundai-gloss.jpg";
 import hyundaiMatte from "@/assets/gallery-hyundai-matte.jpg";
 import salon from "@/assets/gallery-salon.jpg";
-import ppfHands from "@/assets/process-ppf-hands.jpg";
-import ppfHood from "@/assets/process-ppf-hood.jpg";
-import soundproof from "@/assets/process-soundproof.jpg";
-
 export const heroLightsImage = heroLights;
 export const heroCarImage = heroCar;
-
-/** Existing studio photos used to fill the service cards. */
-export const servicePhotos = {
-  ppf: mustang,
-  tint: zeekr,
-  vinyl: hyundaiMatte,
-  sound: soundproof,
-} as const;
 
 export type GalleryWork = {
   src: string;
@@ -74,13 +62,3 @@ export const galleryImages: readonly GalleryWork[] = [
     tags: ["Салон"],
   },
 ];
-
-export const processImages = [
-  { src: ppfHands, alt: "Монтаж защитной плёнки на кузов автомобиля", caption: "Точность монтажа" },
-  {
-    src: ppfHood,
-    alt: "Оклейка капота защитной плёнкой в Capital Detailing",
-    caption: "Чистая технология",
-  },
-  { src: soundproof, alt: "Шумо- и виброизоляция пола салона", caption: "Comfort Mat" },
-] as const;
