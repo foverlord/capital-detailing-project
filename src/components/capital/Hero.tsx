@@ -21,65 +21,70 @@ function RatingStars() {
 export function Hero() {
   return (
     <section id="top" className="bg-[#101115]">
-      <div className="mx-auto grid max-w-[1440px] items-start gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:gap-6 lg:px-14 lg:py-8">
-        <div className="@container min-w-0 lg:pt-32">
-          <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-400">
-            Астана · студия защиты авто
-          </p>
-          <h1 className="mt-5 font-display text-[clamp(2.05rem,12cqw,5.15rem)] font-black uppercase leading-[0.86] tracking-[-0.045em] text-white">
-            Защита и
-            <br />
-            <span className="text-[#d0b898]">эстетика</span>
-            <br />
-            авто в Астане
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-400">
-            Оклейка PPF, полировка и шумоизоляция — от городских седанов до кроссоверов и спорткаров
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href="#booking"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-100"
-            >
-              Онлайн расчет
-              <ArrowRight className="size-4" />
-            </a>
-            <a
-              href="#works"
-              className="inline-flex min-h-12 items-center justify-center px-4 text-sm text-zinc-300 transition-colors hover:text-white"
-            >
-              Смотреть работы
-            </a>
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-10 sm:px-8 lg:grid lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:items-start lg:gap-6 lg:px-14 lg:py-8">
+        <div className="contents lg:block lg:min-w-0 lg:pt-32">
+          <div className="@container order-1 min-w-0">
+            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              Астана · студия защиты авто
+            </p>
+            <h1 className="mt-5 font-display text-[clamp(2.05rem,12cqw,5.15rem)] font-black uppercase leading-[0.86] tracking-[-0.045em] text-white">
+              Защита и
+              <br />
+              <span className="text-[#d0b898]">эстетика</span>
+              <br />
+              авто в Астане
+            </h1>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-400">
+              Оклейка PPF, полировка и шумоизоляция — от городских седанов до кроссоверов и
+              спорткаров
+            </p>
           </div>
-          <dl className="mt-10 grid max-w-xl grid-cols-3 divide-x divide-white/10 overflow-hidden rounded-2xl border border-white/10">
-            <div className="px-2 py-4 sm:px-5">
-              <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
-                2ГИС
-              </dt>
-              <dd className="mt-1 flex items-center gap-1.5 text-base font-medium text-white sm:text-lg">
-                <span>4.9</span>
-                <RatingStars />
-              </dd>
+          <div className="order-3 min-w-0">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:mt-8">
+              <a
+                href="#booking"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-100"
+              >
+                Онлайн расчет
+                <ArrowRight className="size-4" />
+              </a>
+              <a
+                href="#works"
+                className="inline-flex min-h-12 items-center justify-center px-4 text-sm text-zinc-300 transition-colors hover:text-white"
+              >
+                Смотреть работы
+              </a>
             </div>
-            <div className="px-2 py-4 sm:px-5">
-              <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
-                Гарантия
-              </dt>
-              <dd className="mt-1 flex items-center gap-1.5 text-base font-medium text-white sm:text-lg">
-                <Shield className="size-4 shrink-0 text-[#d0b898]" strokeWidth={1.5} aria-hidden />
-                <span>5 лет</span>
-              </dd>
-            </div>
-            <div className="px-2 py-4 sm:px-5">
-              <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
-                Плёнки студии
-              </dt>
-              <dd className="mt-1 text-base font-medium text-white sm:text-lg">STEK / SunTek</dd>
-            </div>
-          </dl>
+            <dl className="mt-10 grid max-w-xl grid-cols-3 divide-x divide-white/10 overflow-hidden rounded-2xl border border-white/10">
+              <div className="px-2 py-4 sm:px-5">
+                <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+                  2ГИС
+                </dt>
+                <dd className="mt-1 flex items-center gap-1.5 text-base font-medium text-white sm:text-lg">
+                  <span>4.9</span>
+                  <RatingStars />
+                </dd>
+              </div>
+              <div className="px-2 py-4 sm:px-5">
+                <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+                  Гарантия
+                </dt>
+                <dd className="mt-1 flex items-center gap-1.5 text-base font-medium text-white sm:text-lg">
+                  <Shield className="size-4 shrink-0 text-[#d0b898]" strokeWidth={1.5} aria-hidden />
+                  <span>5 лет</span>
+                </dd>
+              </div>
+              <div className="px-2 py-4 sm:px-5">
+                <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+                  Плёнки студии
+                </dt>
+                <dd className="mt-1 text-base font-medium text-white sm:text-lg">STEK / SunTek</dd>
+              </div>
+            </dl>
+          </div>
         </div>
 
-        <div className="flex min-w-0 flex-col items-center bg-[#101115]">
+        <div className="order-2 flex min-w-0 flex-col items-center bg-[#101115] lg:order-none">
           <div className="w-full bg-[#101115]">
             <img
               src={heroLightsImage}
