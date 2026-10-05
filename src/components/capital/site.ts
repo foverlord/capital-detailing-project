@@ -1,3 +1,5 @@
+import type { BodyClassId, ServiceId } from "./pricing";
+
 /** Studio facts already present in the repo. Phone is still a placeholder. */
 
 export const studio = {
@@ -28,30 +30,9 @@ export const navLinks = [
   { label: "Контакты", href: "#contacts" },
 ] as const;
 
-export const bodyClasses = [
-  { id: "sedan", label: "Седан" },
-  { id: "crossover", label: "Кроссовер" },
-  { id: "suv", label: "Внедорожник" },
-] as const;
-
-/** Same eight services as the services block. Not a price list. */
-export const leadPackages = [
-  { id: "ppf", label: "Антигравийная плёнка" },
-  { id: "film", label: "Тонировка и оклейка плёнкой" },
-  { id: "windshield", label: "Защита лобового стекла" },
-  { id: "polish", label: "Полировка кузова" },
-  { id: "pdr", label: "Удаление вмятин без покраски" },
-  { id: "interior", label: "Детейлинг-химчистка салона" },
-  { id: "sound", label: "Шумоизоляция салона" },
-  { id: "restore", label: "Реставрация и уход за интерьером" },
-] as const;
-
-export type BodyClassId = (typeof bodyClasses)[number]["id"];
-export type LeadPackageId = (typeof leadPackages)[number]["id"];
-
 export type LeadRequest = {
   bodyClass: BodyClassId;
-  packageId: LeadPackageId;
+  packageId: ServiceId;
   phone: string;
 };
 

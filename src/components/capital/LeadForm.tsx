@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { FadeIn } from "./FadeIn";
+import { BodyClassSwitcher } from "./BodyClassSwitcher";
+import { services, type ServiceId } from "./pricing";
+import { useQuote } from "./quote-context";
 import { Accent } from "./SectionHeading";
-import { bodyClasses, leadPackages, saveLead, type BodyClassId, type LeadPackageId } from "./site";
+import { saveLead } from "./site";
 
 type FormErrors = {
-  bodyClass?: string;
   packageId?: string;
   phone?: string;
 };
@@ -44,17 +46,13 @@ function localDigits(value: string) {
   return withoutCountry.slice(0, 10);
 }
 
-function isBodyClass(value: string): value is BodyClassId {
-  return bodyClasses.some((item) => item.id === value);
-}
-
-function isPackage(value: string): value is LeadPackageId {
-  return leadPackages.some((item) => item.id === value);
+function isPackage(value: string): value is ServiceId {
+  return services.some((item) => item.id === value);
 }
 
 export function LeadForm() {
-  const [bodyClass, setBodyClass] = useState<BodyClassId | "">("");
-  const [packageId, setPackageId] = useState<LeadPackageId | "">("");
+  const { bodyClass } = useQuote();
+  const [packageId, setPackageId] = useState<ServiceId | "">("");
   const [phone, setPhone] = useState("+7");
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
@@ -62,12 +60,11 @@ export function LeadForm() {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextErrors: FormErrors = {};
-    if (!isBodyClass(bodyClass)) nextErrors.bodyClass = "Выберите класс кузова";
     if (!isPackage(packageId)) nextErrors.packageId = "Выберите услугу";
     if (localDigits(phone).length < 10) nextErrors.phone = "Введите телефон полностью";
     setErrors(nextErrors);
-    if (nextErrors.bodyClass || nextErrors.packageId || nextErrors.phone) return;
-    if (!isBodyClass(bodyClass) || !isPackage(packageId)) return;
+    if (nextErrors.packageId || nextErrors.phone) return;
+    if (!isPackage(packageId)) return;
 
     const payload = { bodyClass, packageId, phone };
     setStatus("submitting");
@@ -107,7 +104,6 @@ export function LeadForm() {
               type="button"
               onClick={() => {
                 setStatus("idle");
-                setBodyClass("");
                 setPackageId("");
                 setPhone("+7");
                 setErrors({});
@@ -124,34 +120,7 @@ export function LeadForm() {
           >
             <fieldset className="flex flex-col gap-3">
               <legend className="text-sm font-medium text-zinc-200">1. Класс кузова</legend>
-              <ToggleGroup
-                type="single"
-                value={bodyClass}
-                onValueChange={(value) => {
-                  setBodyClass(isBodyClass(value) ? value : "");
-                  setErrors((current) => clearError(current, "bodyClass"));
-                }}
-                variant="outline"
-                aria-label="Класс кузова"
-                aria-invalid={errors.bodyClass ? true : undefined}
-                aria-describedby={errors.bodyClass ? "body-class-error" : undefined}
-                className="grid w-full grid-cols-1 gap-2 sm:grid-cols-3"
-              >
-                {bodyClasses.map((item) => (
-                  <ToggleGroupItem
-                    key={item.id}
-                    value={item.id}
-                    className="min-h-12 w-full px-3 text-sm"
-                  >
-                    {item.label}
-                  </ToggleGroupItem>
-                ))}
-              </ToggleGroup>
-              {errors.bodyClass ? (
-                <p id="body-class-error" className="text-sm text-destructive">
-                  {errors.bodyClass}
-                </p>
-              ) : null}
+              <BodyClassSwitcher idPrefix="lead-class" />
             </fieldset>
 
             <fieldset className="flex flex-col gap-3">
@@ -169,13 +138,13 @@ export function LeadForm() {
                 aria-describedby={errors.packageId ? "package-error" : undefined}
                 className="grid w-full grid-cols-1 gap-2"
               >
-                {leadPackages.map((item) => (
+                {services.map((item) => (
                   <ToggleGroupItem
                     key={item.id}
                     value={item.id}
                     className="min-h-12 w-full justify-start px-4 text-sm"
                   >
-                    {item.label}
+                    {item.title}
                   </ToggleGroupItem>
                 ))}
               </ToggleGroup>

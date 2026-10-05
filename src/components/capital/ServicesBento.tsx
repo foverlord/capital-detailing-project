@@ -1,4 +1,5 @@
 import type { PointerEvent, ReactNode } from "react";
+import { BodyClassSwitcher } from "./BodyClassSwitcher";
 import { FadeIn } from "./FadeIn";
 import { Accent } from "./SectionHeading";
 
@@ -222,6 +223,8 @@ export function ServicesBento() {
             фиксированного прайса на сайте.
           </p>
         </header>
+
+        <BodyClassSwitcher idPrefix="services-class" />
 
         <div className="flex flex-col gap-[22px]">
           <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-white/8 pb-4">
