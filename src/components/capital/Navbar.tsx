@@ -23,9 +23,16 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-zinc-300 transition-colors hover:text-white"
+              className="text-sm whitespace-nowrap text-zinc-300 transition-colors hover:text-white"
             >
-              {link.label}
+              {link.compactLabel ? (
+                <>
+                  <span className="lg:hidden">{link.compactLabel}</span>
+                  <span className="hidden lg:inline">{link.label}</span>
+                </>
+              ) : (
+                link.label
+              )}
             </a>
           ))}
         </nav>
@@ -34,7 +41,7 @@ export function Navbar() {
           href="#booking"
           className="hidden min-h-10 items-center rounded-full bg-white px-5 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-100 md:inline-flex"
         >
-          Онлайн расчет
+          Онлайн расчёт
         </a>
 
         <button
@@ -71,7 +78,7 @@ export function Navbar() {
               onClick={close}
               className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-white px-5 text-sm font-medium text-zinc-950"
             >
-              Онлайн расчет
+              Онлайн расчёт
             </a>
           </div>
         </nav>

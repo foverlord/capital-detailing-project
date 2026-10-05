@@ -23,12 +23,19 @@ export const studio = {
   gisRouteUrl: "https://2gis.kz/astana/directions/points/|71.4304,51.1282",
 } as const;
 
-export const navLinks = [
-  { label: "Услуги", href: "#services" },
+export interface NavLink {
+  label: string;
+  /** Shorter label for tablet widths (768–1023 px) where the full one does not fit. */
+  compactLabel?: string;
+  href: string;
+}
+
+export const navLinks: readonly NavLink[] = [
+  { label: "Услуги и цены", compactLabel: "Цены", href: "#services" },
   { label: "Работы", href: "#works" },
   { label: "Онлайн расчёт", href: "#booking" },
   { label: "Контакты", href: "#contacts" },
-] as const;
+];
 
 /** Ids only: the server resolves names and the price range from the same price data. */
 export type LeadRequest = {

@@ -58,7 +58,7 @@ export function Standards() {
             href="#booking"
             className="inline-flex w-fit items-center gap-3 rounded-full bg-white px-[30px] py-[17px] text-base font-medium text-[#0b0b0d] transition duration-300 hover:-translate-y-px hover:bg-[#e6d7bf] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#cbb69a] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
-            Онлайн расчет
+            Онлайн расчёт
             <svg
               viewBox="0 0 24 24"
               fill="none"

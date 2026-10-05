@@ -1,5 +1,6 @@
 import { ArrowRight, Shield, Star } from "lucide-react";
 import { heroCarImage, heroLightsImage } from "./assets";
+import { formatFrom, minPriceThousands } from "./pricing";
 
 const starFills = ["w-full", "w-full", "w-full", "w-full", "w-[90%]"] as const;
 
@@ -45,7 +46,7 @@ export function Hero() {
                 href="#booking"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-100"
               >
-                Онлайн расчет
+                Онлайн расчёт
                 <ArrowRight className="size-4" />
               </a>
               <a
@@ -55,8 +56,8 @@ export function Hero() {
                 Смотреть работы
               </a>
             </div>
-            <dl className="mt-10 grid max-w-xl grid-cols-3 divide-x divide-white/10 overflow-hidden rounded-2xl border border-white/10">
-              <div className="px-2 py-4 sm:px-5">
+            <dl className="mt-10 grid max-w-xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
+              <div className="bg-[#101115] px-3 py-4 sm:px-4">
                 <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
                   2ГИС
                 </dt>
@@ -65,7 +66,7 @@ export function Hero() {
                   <RatingStars />
                 </dd>
               </div>
-              <div className="px-2 py-4 sm:px-5">
+              <div className="bg-[#101115] px-3 py-4 sm:px-4">
                 <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
                   Гарантия
                 </dt>
@@ -74,11 +75,25 @@ export function Hero() {
                   <span>5 лет</span>
                 </dd>
               </div>
-              <div className="px-2 py-4 sm:px-5">
+              <div className="bg-[#101115] px-3 py-4 sm:px-4">
                 <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
                   Плёнки студии
                 </dt>
                 <dd className="mt-1 text-base font-medium text-white sm:text-lg">STEK / SunTek</dd>
+              </div>
+              <div className="relative bg-[#101115] px-3 py-4 transition-colors focus-within:bg-white/[0.04] hover:bg-white/[0.04] sm:px-4">
+                <dt className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+                  Цены
+                </dt>
+                <dd className="mt-1 text-base font-medium whitespace-nowrap text-white sm:text-lg">
+                  {/* The link covers the whole cell and leads to the services block with prices. */}
+                  <a
+                    href="#services"
+                    className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-[#d0b898]"
+                  >
+                    {formatFrom(minPriceThousands)}
+                  </a>
+                </dd>
               </div>
             </dl>
           </div>

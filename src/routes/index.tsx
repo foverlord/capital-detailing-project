@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LandingPage } from "@/components/capital/LandingPage";
+import { buildStructuredData, metaDescription } from "@/components/capital/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -7,8 +8,7 @@ export const Route = createFileRoute("/")({
       { title: "Capital Detailing — премиальный детейлинг в Астане" },
       {
         name: "description",
-        content:
-          "Оклейка PPF, полировка и шумоизоляция премиальных авто в Астане. Capital Detailing, ул. Бухар жырау, 36н.",
+        content: metaDescription,
       },
       { property: "og:title", content: "Capital Detailing Astana" },
       {
@@ -17,6 +17,12 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(buildStructuredData()),
+      },
     ],
   }),
   component: Index,
