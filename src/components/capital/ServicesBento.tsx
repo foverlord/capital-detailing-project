@@ -134,7 +134,7 @@ const bodyServices: readonly ServiceCardData[] = [
     copy: "Защита кузова от сколов, царапин и внешних повреждений. Лак остаётся заводским.",
     chips: ["Сколы", "Царапины", "Реагенты"],
     featured: true,
-    className: "min-h-[340px] lg:col-span-6 lg:row-span-2 lg:min-h-full",
+    className: "min-h-[340px] md:col-span-12 lg:col-span-6 lg:row-span-2 lg:min-h-full",
     titleClassName: "text-[clamp(20px,2.4vw,26px)] leading-tight",
     art: (
       <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" className={`${artClass} h-[62%]`}>
