@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { FadeIn } from "./FadeIn";
 import { BodyClassSwitcher } from "./BodyClassSwitcher";
-import { services, type ServiceId } from "./pricing";
+import { isServiceId, services } from "./pricing";
 import { useQuote } from "./quote-context";
 import { Accent } from "./SectionHeading";
 import { saveLead } from "./site";
@@ -46,13 +46,10 @@ function localDigits(value: string) {
   return withoutCountry.slice(0, 10);
 }
 
-function isPackage(value: string): value is ServiceId {
-  return services.some((item) => item.id === value);
-}
+const isPackage = isServiceId;
 
 export function LeadForm() {
-  const { bodyClass } = useQuote();
-  const [packageId, setPackageId] = useState<ServiceId | "">("");
+  const { bodyClass, serviceId: packageId, setService } = useQuote();
   const [phone, setPhone] = useState("+7");
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
@@ -104,7 +101,6 @@ export function LeadForm() {
               type="button"
               onClick={() => {
                 setStatus("idle");
-                setPackageId("");
                 setPhone("+7");
                 setErrors({});
               }}
@@ -129,7 +125,7 @@ export function LeadForm() {
                 type="single"
                 value={packageId}
                 onValueChange={(value) => {
-                  setPackageId(isPackage(value) ? value : "");
+                  if (isPackage(value)) setService(value);
                   setErrors((current) => clearError(current, "packageId"));
                 }}
                 variant="outline"

@@ -38,7 +38,7 @@ export function BodyClassSwitcher({ className, idPrefix }: BodyClassSwitcherProp
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
-      <p id={hintId} className="m-0 text-xs text-zinc-500" aria-live="polite">
+      <p id={hintId} className="m-0 text-xs text-zinc-400" aria-live="polite">
         {getBodyClass(bodyClass).fullLabel}
       </p>
     </div>

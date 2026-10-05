@@ -1,12 +1,21 @@
-import type { PointerEvent, ReactNode } from "react";
+import { useRef, useState, type PointerEvent, type ReactNode } from "react";
 import { BodyClassSwitcher } from "./BodyClassSwitcher";
 import { FadeIn } from "./FadeIn";
+import {
+  PRICE_FOOTNOTE,
+  cheapestVariant,
+  formatFrom,
+  getService,
+  rangeFor,
+} from "./pricing";
+import { useQuote } from "./quote-context";
 import { Accent } from "./SectionHeading";
+import { ServicePanel } from "./ServicePanel";
 
 type ServiceCardData = {
+  /** Same id as the service in pricing.ts. The title and prices come from there. */
   id: string;
   tag: string;
-  title: string;
   copy: string;
   chips?: readonly string[];
   art: ReactNode;
@@ -14,25 +23,54 @@ type ServiceCardData = {
   image?: string;
   className: string;
   titleClassName?: string;
+  /** Large card: bigger price. */
+  featured?: boolean;
 };
 
-function trackGlow(event: PointerEvent<HTMLAnchorElement>) {
+function trackGlow(event: PointerEvent<HTMLDivElement>) {
   const card = event.currentTarget;
   const rect = card.getBoundingClientRect();
   card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
   card.style.setProperty("--my", `${event.clientY - rect.top}px`);
 }
 
-function ServiceCard({ card }: { card: ServiceCardData }) {
+/** Cheapest variant for the chosen class, with an honest note on what the price covers. */
+function PriceTag({ serviceId, featured }: { serviceId: string; featured?: boolean | undefined }) {
+  const { bodyClass } = useQuote();
+  const variant = cheapestVariant(getService(serviceId), bodyClass);
+  const [from] = rangeFor(variant, bodyClass);
+
   return (
-    <a
-      href="#booking"
+    <p className="m-0 mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1">
+      <span
+        className={`rounded-full border border-[#d8c39a]/30 bg-zinc-950/45 font-semibold whitespace-nowrap text-[#d8c39a] tabular-nums ${
+          featured ? "px-4 py-1.5 text-xl" : "px-3 py-1 text-sm"
+        }`}
+      >
+        {formatFrom(from)}
+      </span>
+      <span className="text-xs text-zinc-400">{variant.short}</span>
+    </p>
+  );
+}
+
+function ServiceCard({
+  card,
+  onOpen,
+}: {
+  card: ServiceCardData;
+  onOpen: (serviceId: string, trigger: HTMLElement) => void;
+}) {
+  const service = getService(card.id);
+
+  return (
+    <div
       onPointerMove={trackGlow}
-      className={`group relative isolate flex min-w-0 flex-col justify-end gap-2.5 overflow-hidden rounded-[20px] border border-white/8 bg-gradient-to-b from-[#17171c] to-[#111115] p-[22px] text-inherit no-underline transition duration-300 hover:-translate-y-0.5 hover:border-[#d8c39a]/40 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#d8c39a] motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${card.className}`}
+      className={`group relative isolate flex min-w-0 flex-col justify-end gap-2.5 overflow-hidden rounded-[20px] border border-white/8 bg-gradient-to-b from-[#17171c] to-[#111115] p-[22px] text-inherit transition duration-300 hover:-translate-y-0.5 hover:border-[#d8c39a]/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${card.className}`}
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(360px_circle_at_var(--mx,70%)_var(--my,0%),rgba(216,195,154,0.13),transparent_65%)] opacity-55 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(360px_circle_at_var(--mx,70%)_var(--my,0%),rgba(216,195,154,0.13),transparent_65%)] opacity-55 transition-opacity duration-300 group-hover:opacity-100 group-has-[:focus-visible]:opacity-100"
       />
       {card.image ? (
         <img
@@ -52,7 +90,15 @@ function ServiceCard({ card }: { card: ServiceCardData }) {
       <h3
         className={`mt-1 font-display font-medium tracking-tight text-balance text-zinc-100 ${card.titleClassName ?? "text-[17px] leading-snug"}`}
       >
-        {card.title}
+        {/* Stretched button: the whole card opens the price panel, markup stays valid. */}
+        <button
+          type="button"
+          aria-haspopup="dialog"
+          onClick={(event) => onOpen(card.id, event.currentTarget)}
+          className="cursor-pointer text-left [font:inherit] [letter-spacing:inherit] text-inherit after:absolute after:inset-0 after:rounded-[20px] after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-[3px] focus-visible:after:outline-[#d8c39a]"
+        >
+          {service.title}
+        </button>
       </h3>
       <p className="m-0 max-w-[46ch] text-[13.5px] leading-relaxed text-zinc-400">{card.copy}</p>
       {card.chips ? (
@@ -67,13 +113,14 @@ function ServiceCard({ card }: { card: ServiceCardData }) {
           ))}
         </ul>
       ) : null}
+      <PriceTag serviceId={card.id} featured={card.featured} />
       <span
         aria-hidden
-        className="absolute top-[18px] right-[18px] grid size-[34px] place-items-center rounded-full border border-white/8 bg-zinc-950/50 text-[15px] text-zinc-100 transition duration-300 group-hover:rotate-45 group-hover:bg-[#d8c39a] group-hover:text-[#17140d] group-focus-visible:rotate-45 group-focus-visible:bg-[#d8c39a] group-focus-visible:text-[#17140d] motion-reduce:transition-none motion-reduce:group-hover:rotate-0"
+        className="absolute top-[18px] right-[18px] grid size-[34px] place-items-center rounded-full border border-white/8 bg-zinc-950/50 text-[15px] text-zinc-100 transition duration-300 group-hover:rotate-45 group-hover:bg-[#d8c39a] group-hover:text-[#17140d] group-has-[:focus-visible]:rotate-45 group-has-[:focus-visible]:bg-[#d8c39a] group-has-[:focus-visible]:text-[#17140d] motion-reduce:transition-none motion-reduce:group-hover:rotate-0"
       >
         →
       </span>
-    </a>
+    </div>
   );
 }
 
@@ -84,9 +131,9 @@ const bodyServices: readonly ServiceCardData[] = [
   {
     id: "ppf",
     tag: "Защита",
-    title: "Антигравийная плёнка (бронеплёнка)",
     copy: "Защита кузова от сколов, царапин и внешних повреждений. Лак остаётся заводским.",
     chips: ["Сколы", "Царапины", "Реагенты"],
+    featured: true,
     className: "min-h-[340px] lg:col-span-6 lg:row-span-2 lg:min-h-full",
     titleClassName: "text-[clamp(20px,2.4vw,26px)] leading-tight",
     art: (
@@ -102,7 +149,6 @@ const bodyServices: readonly ServiceCardData[] = [
   {
     id: "film",
     tag: "Стиль",
-    title: "Тонировка и оклейка плёнкой",
     copy: "Тонирование стёкол, смена цвета, стилизация элементов.",
     className: "min-h-[232px] md:col-span-6 lg:col-span-3",
     art: (
@@ -116,7 +162,6 @@ const bodyServices: readonly ServiceCardData[] = [
   {
     id: "windshield",
     tag: "Защита",
-    title: "Защита лобового стекла",
     copy: "Защитная плёнка от камней и пескоструя.",
     className: "min-h-[232px] md:col-span-6 lg:col-span-3",
     art: (
@@ -131,7 +176,6 @@ const bodyServices: readonly ServiceCardData[] = [
   {
     id: "polish",
     tag: "Блеск",
-    title: "Полировка кузова",
     copy: "Восстановительная и защитная полировка лака, керамические и защитные составы.",
     className: "min-h-[232px] md:col-span-6 lg:col-span-3",
     art: (
@@ -146,7 +190,6 @@ const bodyServices: readonly ServiceCardData[] = [
   {
     id: "pdr",
     tag: "Геометрия",
-    title: "Удаление вмятин без покраски (PDR)",
     copy: "Восстановление геометрии элементов без перекраса.",
     className: "min-h-[232px] md:col-span-6 lg:col-span-3",
     art: (
@@ -165,7 +208,6 @@ const salonServices: readonly ServiceCardData[] = [
   {
     id: "interior",
     tag: "Чистота",
-    title: "Детейлинг-химчистка салона",
     copy: "Глубокая чистка сидений, потолка, пластика и ковролина. Устраняем запахи и бактерии.",
     chips: ["Сиденья", "Потолок", "Пластик", "Ковролин"],
     className: "min-h-[300px] md:col-span-6 lg:col-span-4",
@@ -180,7 +222,6 @@ const salonServices: readonly ServiceCardData[] = [
   {
     id: "sound",
     tag: "Тишина",
-    title: "Шумоизоляция салона",
     copy: "Комплексная или частичная вибро- и шумоизоляция, чтобы в дороге было тише.",
     className: "min-h-[300px] md:col-span-6 lg:col-span-4",
     art: (
@@ -195,7 +236,6 @@ const salonServices: readonly ServiceCardData[] = [
   {
     id: "restore",
     tag: "Уход",
-    title: "Реставрация и уход за интерьером",
     copy: "Чистка, защита и восстановление кожаных и пластиковых элементов.",
     chips: ["Кожа", "Пластик"],
     className: "min-h-60 md:col-span-12 lg:col-span-4 lg:min-h-[300px]",
@@ -210,6 +250,14 @@ const salonServices: readonly ServiceCardData[] = [
 ];
 
 export function ServicesBento() {
+  const [openServiceId, setOpenServiceId] = useState<string | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  const openPanel = (serviceId: string, trigger: HTMLElement) => {
+    triggerRef.current = trigger;
+    setOpenServiceId(serviceId);
+  };
+
   return (
     <section id="services">
       <FadeIn className="mx-auto flex max-w-[1120px] flex-col gap-14 px-5 py-16 md:px-6 md:py-24">
@@ -219,8 +267,8 @@ export function ServicesBento() {
             Два направления <Accent>студии</Accent>
           </h2>
           <p className="mt-3.5 max-w-[52ch] text-[15px] leading-relaxed text-zinc-400">
-            Восемь услуг для кузова и салона. Срок и состав работ называем после осмотра, без
-            фиксированного прайса на сайте.
+            Восемь услуг для кузова и салона. Ниже ориентировочные цены по классу авто, точную сумму
+            фиксируем в договоре после осмотра.
           </p>
         </header>
 
@@ -237,7 +285,7 @@ export function ServicesBento() {
           </div>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-12 lg:auto-rows-[minmax(232px,auto)]">
             {bodyServices.map((card) => (
-              <ServiceCard key={card.id} card={card} />
+              <ServiceCard key={card.id} card={card} onOpen={openPanel} />
             ))}
           </div>
         </div>
@@ -253,9 +301,10 @@ export function ServicesBento() {
           </div>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-12 lg:auto-rows-[minmax(300px,auto)]">
             {salonServices.map((card) => (
-              <ServiceCard key={card.id} card={card} />
+              <ServiceCard key={card.id} card={card} onOpen={openPanel} />
             ))}
           </div>
+          <p className="m-0 max-w-[72ch] text-xs leading-relaxed text-zinc-500">{PRICE_FOOTNOTE}</p>
         </div>
 
         <div
@@ -264,7 +313,7 @@ export function ServicesBento() {
         >
           <p className="m-0 max-w-[60ch] text-[15px] leading-relaxed text-zinc-400">
             Не уверены, что подойдёт именно вашему автомобилю? Привезите его на осмотр, и мы
-            подберём состав работ и назовём срок.
+            подберём состав работ и назовём срок и точную стоимость.
           </p>
           <a
             href="#booking"
@@ -273,6 +322,14 @@ export function ServicesBento() {
             Записаться на осмотр →
           </a>
         </div>
+
+        <ServicePanel
+          serviceId={openServiceId}
+          returnFocusRef={triggerRef}
+          onOpenChange={(open) => {
+            if (!open) setOpenServiceId(null);
+          }}
+        />
       </FadeIn>
     </section>
   );

@@ -256,3 +256,11 @@ export function formatRange([from, to]: PriceRange): string {
   if (from === to) return formatKzt(from);
   return `${formatAmount(from)}${NBSP}– ${formatAmount(to)}${NBSP}₸`;
 }
+
+export const PRICE_FOOTNOTE =
+  "Указанные цены являются ориентировочными. Точная стоимость зависит от марки, состояния автомобиля и выбранных материалов. Оставьте заявку на бесплатный осмотр и расчёт.";
+
+/** "от 250 000 ₸" with a non-breaking space after "от". */
+export function formatFrom(thousands: number): string {
+  return `от${NBSP}${formatKzt(thousands)}`;
+}
