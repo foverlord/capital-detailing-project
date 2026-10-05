@@ -1,4 +1,4 @@
-import type { BodyClassId, ServiceId } from "./pricing";
+import type { BodyClassId } from "./pricing";
 
 /** Studio facts already present in the repo. Phone is still a placeholder. */
 
@@ -30,16 +30,34 @@ export const navLinks = [
   { label: "Контакты", href: "#contacts" },
 ] as const;
 
+/** Ids only: the server resolves names and the price range from the same price data. */
 export type LeadRequest = {
   bodyClass: BodyClassId;
-  packageId: ServiceId;
+  serviceId: string;
+  variantId: string;
+  /** "+77001234567" */
   phone: string;
 };
 
-/**
- * UI-only lead capture. Persistence is intentionally not wired yet.
- * TODO: Supabase insert + Telegram notify.
- */
+const SEND_TIMEOUT_MS = 15_000;
+
+/** Sends the lead to /api/lead. Throws on network errors, timeouts and non-2xx answers. */
 export async function saveLead(lead: LeadRequest): Promise<void> {
-  void lead;
+  if (typeof navigator !== "undefined" && navigator.onLine === false) {
+    throw new Error("offline");
+  }
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), SEND_TIMEOUT_MS);
+  try {
+    const response = await fetch("/api/lead", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(lead),
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`lead request failed: ${response.status}`);
+  } finally {
+    clearTimeout(timer);
+  }
 }

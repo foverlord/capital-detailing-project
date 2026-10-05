@@ -1,79 +1,120 @@
-import { Check } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { Check, Loader2 } from "lucide-react";
+import { useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { FadeIn } from "./FadeIn";
 import { BodyClassSwitcher } from "./BodyClassSwitcher";
-import { isServiceId, services } from "./pricing";
+import { FadeIn } from "./FadeIn";
+import {
+  PRICE_FOOTNOTE,
+  formatRange,
+  getBodyClass,
+  getService,
+  getVariant,
+  isServiceId,
+  rangeFor,
+  services,
+} from "./pricing";
+import {
+  PHONE_ERROR,
+  PHONE_PLACEHOLDER,
+  isCompletePhone,
+  nextPhoneValue,
+  normalizePhone,
+} from "./phone";
 import { useQuote } from "./quote-context";
 import { Accent } from "./SectionHeading";
-import { saveLead } from "./site";
+import { saveLead, studio } from "./site";
 
-type FormErrors = {
-  packageId?: string;
-  phone?: string;
-};
+type Status = "idle" | "submitting" | "success" | "error";
 
-function formatPhone(value: string) {
-  const digits = value.replace(/\D/g, "");
-  const withoutCountry =
-    digits.startsWith("7") || digits.startsWith("8") ? digits.slice(1) : digits;
-  const local = withoutCountry.slice(0, 10);
-  const area = local.slice(0, 3);
-  const prefix = local.slice(3, 6);
-  const line = local.slice(6, 8);
-  const last = local.slice(8, 10);
-  let result = "+7";
-  if (area) result += ` (${area}`;
-  if (area.length === 3) result += ")";
-  if (prefix) result += ` ${prefix}`;
-  if (line) result += `-${line}`;
-  if (last) result += `-${last}`;
-  return result;
+/** Estimate for the current selection. Rendered twice: left column (lg+) and above the button. */
+function EstimateBlock() {
+  const { bodyClass, serviceId, variantId } = useQuote();
+  const service = getService(serviceId);
+  const variant = getVariant(service, variantId);
+  const range = formatRange(rangeFor(variant, bodyClass));
+
+  return (
+    <div className="flex flex-col gap-3 rounded-xl border border-[#d8c39a]/25 bg-zinc-900/40 p-5 backdrop-blur-md">
+      <p className="m-0 text-xs font-medium tracking-[0.16em] text-zinc-500 uppercase">
+        Оценка по вашему выбору
+      </p>
+      <p className="m-0 text-sm leading-snug text-zinc-400">
+        {service.title} · {variant.name} · {getBodyClass(bodyClass).fullLabel}
+      </p>
+      <p
+        className="m-0 font-display text-zinc-100 tabular-nums"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <span className="block font-sans text-sm font-normal text-zinc-400">Ориентировочно</span>{" "}
+        <span className="block text-2xl leading-tight font-semibold text-[#d8c39a] sm:text-[1.75rem]">
+          {range}
+        </span>
+      </p>
+      <p className="m-0 text-xs leading-relaxed text-zinc-500">{PRICE_FOOTNOTE}</p>
+    </div>
+  );
 }
-
-function clearError(current: FormErrors, key: keyof FormErrors): FormErrors {
-  const next = { ...current };
-  delete next[key];
-  return next;
-}
-
-function localDigits(value: string) {
-  const digits = value.replace(/\D/g, "");
-  const withoutCountry =
-    digits.startsWith("7") || digits.startsWith("8") ? digits.slice(1) : digits;
-  return withoutCountry.slice(0, 10);
-}
-
-const isPackage = isServiceId;
 
 export function LeadForm() {
-  const { bodyClass, serviceId: packageId, setService } = useQuote();
+  const { bodyClass, serviceId, variantId, setService, setVariant } = useQuote();
+  const service = getService(serviceId);
+  const variant = getVariant(service, variantId);
+  const hasVariants = service.variants.length > 1;
+
   const [phone, setPhone] = useState("+7");
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [phoneError, setPhoneError] = useState(false);
+  const [trap, setTrap] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  // State updates are async; the ref stops a fast second click from sending a duplicate.
+  const sending = useRef(false);
+
+  const whatsappMessage = `Здравствуйте! Интересует: ${service.title} — ${variant.name}, ${
+    getBodyClass(bodyClass).fullLabel
+  }. Ориентир на сайте: ${formatRange(rangeFor(variant, bodyClass))}.`;
+  const whatsappHref = `${studio.phoneWhatsappHref}?text=${encodeURIComponent(whatsappMessage)}`;
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const nextErrors: FormErrors = {};
-    if (!isPackage(packageId)) nextErrors.packageId = "Выберите услугу";
-    if (localDigits(phone).length < 10) nextErrors.phone = "Введите телефон полностью";
-    setErrors(nextErrors);
-    if (nextErrors.packageId || nextErrors.phone) return;
-    if (!isPackage(packageId)) return;
+    if (sending.current) return;
 
-    const payload = { bodyClass, packageId, phone };
-    setStatus("submitting");
-    void saveLead(payload).then(() => {
+    if (!isCompletePhone(phone)) {
+      setPhoneError(true);
+      document.getElementById("lead-phone")?.focus();
+      return;
+    }
+    setPhoneError(false);
+
+    // Hidden trap field is filled only by bots: look successful, send nothing.
+    if (trap.trim() !== "") {
       setStatus("success");
-    });
+      return;
+    }
+
+    sending.current = true;
+    setStatus("submitting");
+    saveLead({
+      bodyClass,
+      serviceId: service.id,
+      variantId: variant.id,
+      phone: normalizePhone(phone),
+    })
+      .then(() => setStatus("success"))
+      .catch(() => setStatus("error"))
+      .finally(() => {
+        sending.current = false;
+      });
   };
+
+  const submitting = status === "submitting";
+  const phoneStep = hasVariants ? 4 : 3;
 
   return (
     <section id="booking" className="border-y border-zinc-800/80 bg-zinc-950">
       <FadeIn className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 lg:self-stretch">
           <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-500">
             Заявка
           </p>
@@ -81,19 +122,25 @@ export function LeadForm() {
             Онлайн <Accent>расчёт</Accent>
           </h2>
           <p className="max-w-md text-sm leading-7 text-zinc-400 md:text-base">
-            Это не калькулятор с фиксированной ценой. Оставьте класс кузова, пакет и телефон —
-            перезвоним и назовём стоимость по вашему авто.
+            Выберите класс авто и услугу, мы покажем ориентировочную стоимость. Точную цену назовём
+            после осмотра и зафиксируем в договоре.
           </p>
           <p className="text-sm text-zinc-500">Студия на связи ежедневно, 10:00–20:00.</p>
+          <div className="hidden max-w-md lg:sticky lg:top-24 lg:mt-4 lg:block">
+            <EstimateBlock />
+          </div>
         </div>
 
         {status === "success" ? (
-          <div className="flex min-h-80 flex-col items-start justify-center gap-4 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 backdrop-blur-md md:p-8">
+          <div
+            role="status"
+            className="flex min-h-80 flex-col items-start justify-center gap-4 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 backdrop-blur-md md:p-8"
+          >
             <span className="grid size-12 place-items-center rounded-full border border-zinc-700 text-zinc-100">
               <Check />
             </span>
             <p className="max-w-sm text-lg font-medium leading-snug text-zinc-100">
-              Заявка принята. Перезвоним и уточним стоимость и детали по авто.
+              Заявка принята. Перезвоним в рабочее время, ежедневно с 10:00 до 20:00
             </p>
             <Button
               variant="glass"
@@ -102,7 +149,8 @@ export function LeadForm() {
               onClick={() => {
                 setStatus("idle");
                 setPhone("+7");
-                setErrors({});
+                setPhoneError(false);
+                setTrap("");
               }}
             >
               Новая заявка
@@ -112,7 +160,7 @@ export function LeadForm() {
           <form
             onSubmit={submit}
             noValidate
-            className="flex flex-col gap-6 rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-md md:p-7"
+            className="relative flex flex-col gap-6 rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-5 backdrop-blur-md md:p-7"
           >
             <fieldset className="flex flex-col gap-3">
               <legend className="text-sm font-medium text-zinc-200">1. Класс кузова</legend>
@@ -123,69 +171,140 @@ export function LeadForm() {
               <legend className="text-sm font-medium text-zinc-200">2. Услуга / пакет</legend>
               <ToggleGroup
                 type="single"
-                value={packageId}
+                value={serviceId}
                 onValueChange={(value) => {
-                  if (isPackage(value)) setService(value);
-                  setErrors((current) => clearError(current, "packageId"));
+                  if (isServiceId(value)) setService(value);
                 }}
                 variant="outline"
                 aria-label="Услуга или пакет"
-                aria-invalid={errors.packageId ? true : undefined}
-                aria-describedby={errors.packageId ? "package-error" : undefined}
                 className="grid w-full grid-cols-1 gap-2"
               >
                 {services.map((item) => (
                   <ToggleGroupItem
                     key={item.id}
                     value={item.id}
-                    className="min-h-12 w-full justify-start px-4 text-sm"
+                    className="min-h-12 w-full justify-start px-4 text-left text-sm"
                   >
                     {item.title}
                   </ToggleGroupItem>
                 ))}
               </ToggleGroup>
-              {errors.packageId ? (
-                <p id="package-error" className="text-sm text-destructive">
-                  {errors.packageId}
-                </p>
-              ) : null}
             </fieldset>
+
+            {hasVariants ? (
+              <fieldset className="flex flex-col gap-3">
+                <legend className="text-sm font-medium text-zinc-200">3. Вариант работ</legend>
+                <ToggleGroup
+                  type="single"
+                  value={variant.id}
+                  onValueChange={(value) => {
+                    if (value) setVariant(value);
+                  }}
+                  variant="outline"
+                  aria-label="Вариант работ"
+                  className="flex w-full flex-wrap justify-start gap-2"
+                >
+                  {service.variants.map((item) => (
+                    <ToggleGroupItem
+                      key={item.id}
+                      value={item.id}
+                      className="h-auto min-h-11 max-w-full px-3 py-2 text-left text-[13px] leading-snug sm:text-sm"
+                    >
+                      {item.name}
+                    </ToggleGroupItem>
+                  ))}
+                </ToggleGroup>
+              </fieldset>
+            ) : null}
 
             <div className="flex flex-col gap-2">
               <label htmlFor="lead-phone" className="text-sm font-medium text-zinc-200">
-                3. Телефон
+                {phoneStep}. Телефон
               </label>
               <Input
                 id="lead-phone"
                 name="phone"
+                type="tel"
                 inputMode="tel"
                 autoComplete="tel"
                 required
                 value={phone}
-                placeholder="+7 (___) ___-__-__"
+                placeholder={PHONE_PLACEHOLDER}
                 onChange={(event) => {
-                  setPhone(formatPhone(event.target.value));
-                  setErrors((current) => clearError(current, "phone"));
+                  setPhone((previous) => nextPhoneValue(previous, event.target.value));
+                  setPhoneError(false);
                 }}
-                aria-invalid={errors.phone ? true : undefined}
-                aria-describedby={errors.phone ? "lead-phone-error" : undefined}
+                aria-invalid={phoneError ? true : undefined}
+                aria-describedby={phoneError ? "lead-phone-error" : undefined}
                 className="h-12"
               />
-              {errors.phone ? (
-                <p id="lead-phone-error" className="text-sm text-destructive">
-                  {errors.phone}
+              {phoneError ? (
+                <p id="lead-phone-error" className="m-0 text-sm text-destructive">
+                  {PHONE_ERROR}
                 </p>
               ) : null}
             </div>
 
-            <Button
-              variant="luxury"
-              type="submit"
-              className="min-h-12"
-              disabled={status === "submitting"}
-            >
-              {status === "submitting" ? "Отправляем…" : "Отправить заявку"}
-            </Button>
+            {/* Spam trap: invisible to people, tempting to bots. */}
+            <div aria-hidden className="absolute -left-[9999px] size-px overflow-hidden">
+              <label>
+                Оставьте это поле пустым
+                <input
+                  type="text"
+                  name="hp_field"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={trap}
+                  onChange={(event) => setTrap(event.target.value)}
+                />
+              </label>
+            </div>
+
+            <div className="lg:hidden">
+              <EstimateBlock />
+            </div>
+
+            {status === "error" ? (
+              <p role="alert" className="m-0 text-sm leading-relaxed text-destructive">
+                Не удалось отправить заявку. Попробуйте ещё раз или напишите нам в{" "}
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium underline underline-offset-4"
+                >
+                  WhatsApp
+                </a>
+              </p>
+            ) : null}
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button
+                variant="luxury"
+                type="submit"
+                className="min-h-12 sm:flex-1"
+                disabled={submitting}
+                aria-busy={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <Loader2 className="animate-spin" aria-hidden />
+                    Отправляем…
+                  </>
+                ) : (
+                  "Получить точный расчёт"
+                )}
+              </Button>
+              <Button variant="glass" asChild className="min-h-12">
+                <a href={whatsappHref} target="_blank" rel="noreferrer">
+                  Написать в WhatsApp
+                </a>
+              </Button>
+            </div>
+            {/*
+              TODO(owner): consent line for personal data processing goes here.
+              There is no privacy policy on the site yet, so no legal text is added.
+            */}
           </form>
         )}
       </FadeIn>
