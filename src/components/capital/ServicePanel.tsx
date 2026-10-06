@@ -16,6 +16,8 @@ import { useQuote } from "./quote-context";
 type ServicePanelProps = {
   /** Open service, or null when closed. */
   serviceId: string | null;
+  /** Short service description from the bento card (shown in the panel, not on the card). */
+  serviceCopy?: string | undefined;
   onOpenChange: (open: boolean) => void;
   /** Card that opened the panel. Focus goes back to it on close. */
   returnFocusRef: RefObject<HTMLElement | null>;
@@ -25,11 +27,20 @@ type ServicePanelProps = {
  * Detailed prices for one service. Bottom sheet on phones, side panel from md.
  * Esc, the close button and a click outside all close it (Radix Dialog).
  */
-export function ServicePanel({ serviceId, onOpenChange, returnFocusRef }: ServicePanelProps) {
+export function ServicePanel({
+  serviceId,
+  serviceCopy,
+  onOpenChange,
+  returnFocusRef,
+}: ServicePanelProps) {
   // Keep the last service so the content doesn't vanish during the exit animation.
   const lastServiceId = useRef<string | null>(serviceId);
   if (serviceId) lastServiceId.current = serviceId;
   const service = lastServiceId.current ? getService(lastServiceId.current) : null;
+
+  const lastCopy = useRef<string | undefined>(undefined);
+  if (serviceCopy) lastCopy.current = serviceCopy;
+  const panelCopy = serviceCopy ?? lastCopy.current;
 
   // Set when the user leaves through "Получить точный расчёт": focus then goes to the form.
   const goToForm = useRef(false);
@@ -55,6 +66,7 @@ export function ServicePanel({ serviceId, onOpenChange, returnFocusRef }: Servic
             <PanelBody
               key={service.id}
               service={service}
+              copy={panelCopy}
               onChooseQuote={() => {
                 goToForm.current = true;
                 onOpenChange(false);
@@ -69,9 +81,11 @@ export function ServicePanel({ serviceId, onOpenChange, returnFocusRef }: Servic
 
 function PanelBody({
   service,
+  copy,
   onChooseQuote,
 }: {
   service: PricedService;
+  copy?: string | undefined;
   onChooseQuote: () => void;
 }) {
   const { bodyClass, chooseQuote } = useQuote();
@@ -84,8 +98,15 @@ function PanelBody({
           <Dialog.Title className="font-display text-xl leading-snug font-medium tracking-tight text-balance text-zinc-100">
             {service.title}
           </Dialog.Title>
-          <Dialog.Description className="m-0 text-[13px] text-zinc-400">
-            Ориентировочные цены для выбранного класса автомобиля
+          <Dialog.Description className="m-0 flex flex-col gap-2.5">
+            {copy ? (
+              <span className="text-[14px] leading-snug font-medium text-[#d8c39a] text-pretty">
+                {copy}
+              </span>
+            ) : null}
+            <span className="text-[13px] leading-relaxed text-zinc-500">
+              Ориентировочные цены для выбранного класса автомобиля
+            </span>
           </Dialog.Description>
         </div>
         <Dialog.Close className="grid size-11 shrink-0 place-items-center rounded-full border border-white/8 text-zinc-100 transition-colors hover:bg-white/8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d8c39a]">

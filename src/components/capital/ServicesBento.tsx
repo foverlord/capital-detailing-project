@@ -100,7 +100,6 @@ function ServiceCard({
           {service.title}
         </button>
       </h3>
-      <p className="m-0 max-w-[46ch] text-[13.5px] leading-relaxed text-zinc-400">{card.copy}</p>
       {card.chips ? (
         <ul className="mt-1 flex list-none flex-wrap gap-1.5 p-0">
           {card.chips.map((chip) => (
@@ -249,6 +248,11 @@ const salonServices: readonly ServiceCardData[] = [
   },
 ];
 
+/** Card marketing copy lives here; the panel shows it when a service is opened. */
+const serviceCardCopy: Record<string, string> = Object.fromEntries(
+  [...bodyServices, ...salonServices].map((card) => [card.id, card.copy]),
+);
+
 export function ServicesBento() {
   const [openServiceId, setOpenServiceId] = useState<string | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
@@ -325,6 +329,7 @@ export function ServicesBento() {
 
         <ServicePanel
           serviceId={openServiceId}
+          serviceCopy={openServiceId ? serviceCardCopy[openServiceId] : undefined}
           returnFocusRef={triggerRef}
           onOpenChange={(open) => {
             if (!open) setOpenServiceId(null);
