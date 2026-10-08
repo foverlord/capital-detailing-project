@@ -1,6 +1,6 @@
 import type { BodyClassId } from "./pricing";
 
-/** Studio facts already present in the repo. Phone is still a placeholder. */
+/** Studio facts. Phone and WhatsApp are the studio line. */
 
 export const studio = {
   name: "Capital Detailing",
@@ -8,12 +8,9 @@ export const studio = {
   city: "Астана",
   addressLines: ["ул. Бухар жырау, 36н", "ЖК Адал"] as const,
   hours: "Ежедневно 10:00–20:00",
-  phoneDisplay: "+7 XXX XXX XX XX",
-  /** TODO: replace with the studio's real number before launch. */
-  phoneTelHref: "tel:+7XXXXXXXXXX",
-  /** TODO: replace with the studio's real WhatsApp number. */
-  phoneWhatsappHref: "https://wa.me/7XXXXXXXXXX",
-  phoneIsPlaceholder: true,
+  phoneDisplay: "+7 708 111 96 96",
+  phoneTelHref: "tel:+77081119696",
+  phoneWhatsappHref: "https://wa.me/77081119696",
   rating: "4.9",
   ratingSource: "2ГИС",
   reviewCount: "128+",
@@ -37,13 +34,17 @@ export const navLinks: readonly NavLink[] = [
   { label: "Контакты", href: "#contacts" },
 ];
 
-/** Ids only: the server resolves names and the price range from the same price data. */
+/** Ids only: the server resolves names from the same price data. */
 export type LeadRequest = {
   bodyClass: BodyClassId;
   serviceId: string;
   variantId: string;
+  /** Trimmed make and model, 2–80 characters. */
+  carModel: string;
   /** "+77001234567" */
   phone: string;
+  /** Honeypot. People leave this empty; a filled value is dropped on the server. */
+  hp?: string;
 };
 
 const SEND_TIMEOUT_MS = 15_000;

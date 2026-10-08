@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { navLinks } from "./site";
+import { navLinks, studio } from "./site";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -36,6 +36,23 @@ export function Navbar() {
             </a>
           ))}
         </nav>
+
+        <div className="hidden items-center gap-5 lg:flex">
+          <a
+            href={studio.phoneTelHref}
+            className="text-sm whitespace-nowrap text-zinc-300 transition-colors hover:text-white"
+          >
+            {studio.phoneDisplay}
+          </a>
+          <a
+            href={studio.phoneWhatsappHref}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm whitespace-nowrap text-zinc-300 transition-colors hover:text-white"
+          >
+            WhatsApp
+          </a>
+        </div>
 
         <a
           href="#booking"
@@ -73,6 +90,22 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
+            <a
+              href={studio.phoneTelHref}
+              onClick={close}
+              className="flex min-h-12 items-center border-b border-white/[0.06] text-sm text-zinc-100"
+            >
+              {studio.phoneDisplay}
+            </a>
+            <a
+              href={studio.phoneWhatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              onClick={close}
+              className="flex min-h-12 items-center border-b border-white/[0.06] text-sm text-zinc-100"
+            >
+              WhatsApp
+            </a>
             <a
               href="#booking"
               onClick={close}

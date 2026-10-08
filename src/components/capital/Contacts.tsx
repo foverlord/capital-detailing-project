@@ -35,13 +35,17 @@ export function Contacts() {
               <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">
                 Телефон · WhatsApp
               </p>
-              <p className="text-lg font-medium text-zinc-100">{studio.phoneDisplay}</p>
-              {studio.phoneIsPlaceholder ? (
-                <p className="text-sm text-zinc-500">
-                  Номер на сайте временный — заменим на рабочий, как только он будет в карточке
-                  студии.
-                </p>
-              ) : null}
+              <a href={studio.phoneTelHref} className="text-lg font-medium text-zinc-100">
+                {studio.phoneDisplay}
+              </a>
+              <a
+                href={studio.phoneWhatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-zinc-400 underline-offset-4 hover:text-zinc-200 hover:underline"
+              >
+                Написать в WhatsApp
+              </a>
             </div>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">

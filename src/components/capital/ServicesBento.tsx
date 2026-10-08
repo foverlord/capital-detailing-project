@@ -11,6 +11,14 @@ import {
 import { useQuote } from "./quote-context";
 import { Accent } from "./SectionHeading";
 import { ServicePanel } from "./ServicePanel";
+import serviceFilm from "@/assets/service-film.jpg";
+import serviceInterior from "@/assets/service-interior.png";
+import servicePdr from "@/assets/service-pdr.png";
+import servicePolish from "@/assets/service-polish.png";
+import servicePpf from "@/assets/service-ppf.png";
+import serviceRestore from "@/assets/service-restore.jpg";
+import serviceSound from "@/assets/service-sound.jpg";
+import serviceWindshield from "@/assets/service-windshield.png";
 
 type ServiceCardData = {
   /** Same id as the service in pricing.ts. The title and prices come from there. */
@@ -19,8 +27,8 @@ type ServiceCardData = {
   copy: string;
   chips?: readonly string[];
   art: ReactNode;
-  /** Drop a studio photo here later. Until then the line drawing stays. */
   image?: string;
+  imageAlt?: string;
   className: string;
   titleClassName?: string;
   /** Large card: bigger price. */
@@ -73,11 +81,17 @@ function ServiceCard({
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(360px_circle_at_var(--mx,70%)_var(--my,0%),rgba(216,195,154,0.13),transparent_65%)] opacity-55 transition-opacity duration-300 group-hover:opacity-100 group-has-[:focus-visible]:opacity-100"
       />
       {card.image ? (
-        <img
-          src={card.image}
-          alt=""
-          className="absolute inset-0 -z-10 size-full object-cover"
-        />
+        <>
+          <img
+            src={card.image}
+            alt={card.imageAlt ?? ""}
+            className="absolute inset-0 -z-10 size-full object-cover transition duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-[#111115] via-[#111115]/75 via-45% to-[#111115]/15"
+          />
+        </>
       ) : (
         <span aria-hidden className="pointer-events-none absolute inset-0 -z-10">
           {card.art}
@@ -133,6 +147,8 @@ const bodyServices: readonly ServiceCardData[] = [
     copy: "Защита кузова от сколов, царапин и внешних повреждений. Лак остаётся заводским.",
     chips: ["Сколы", "Царапины", "Реагенты"],
     featured: true,
+    image: servicePpf,
+    imageAlt: "Оклейка кузова антигравийной плёнкой в студии",
     className: "min-h-[340px] md:col-span-12 lg:col-span-6 lg:row-span-2 lg:min-h-full",
     titleClassName: "text-[clamp(20px,2.4vw,26px)] leading-tight",
     art: (
@@ -149,6 +165,8 @@ const bodyServices: readonly ServiceCardData[] = [
     id: "film",
     tag: "Стиль",
     copy: "Тонирование стёкол, смена цвета, стилизация элементов.",
+    image: serviceFilm,
+    imageAlt: "Тонировка бокового стекла автомобиля",
     className: "min-h-[232px] md:col-span-6 lg:col-span-3",
     art: (
       <svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" className={artClass}>
@@ -162,6 +180,8 @@ const bodyServices: readonly ServiceCardData[] = [
     id: "windshield",
     tag: "Защита",
     copy: "Защитная плёнка от камней и пескоструя.",
+    image: serviceWindshield,
+    imageAlt: "Нанесение защитной плёнки на лобовое стекло",
     className: "min-h-[232px] md:col-span-6 lg:col-span-3",
     art: (
       <svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" className={artClass}>
@@ -176,6 +196,8 @@ const bodyServices: readonly ServiceCardData[] = [
     id: "polish",
     tag: "Блеск",
     copy: "Восстановительная и защитная полировка лака, керамические и защитные составы.",
+    image: servicePolish,
+    imageAlt: "Полировка кузова машиной в детейлинг-студии",
     className: "min-h-[232px] md:col-span-6 lg:col-span-3",
     art: (
       <svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" className={artClass}>
@@ -190,6 +212,8 @@ const bodyServices: readonly ServiceCardData[] = [
     id: "pdr",
     tag: "Геометрия",
     copy: "Восстановление геометрии элементов без перекраса.",
+    image: servicePdr,
+    imageAlt: "Удаление вмятин без покраски, PDR",
     className: "min-h-[232px] md:col-span-6 lg:col-span-3",
     art: (
       <svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" className={artClass}>
@@ -209,6 +233,8 @@ const salonServices: readonly ServiceCardData[] = [
     tag: "Чистота",
     copy: "Глубокая чистка сидений, потолка, пластика и ковролина. Устраняем запахи и бактерии.",
     chips: ["Сиденья", "Потолок", "Пластик", "Ковролин"],
+    image: serviceInterior,
+    imageAlt: "Химчистка салона: снятые сиденья и чистый пол",
     className: "min-h-[300px] md:col-span-6 lg:col-span-4",
     art: (
       <svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" className={artClass}>
@@ -222,6 +248,8 @@ const salonServices: readonly ServiceCardData[] = [
     id: "sound",
     tag: "Тишина",
     copy: "Комплексная или частичная вибро- и шумоизоляция, чтобы в дороге было тише.",
+    image: serviceSound,
+    imageAlt: "Шумоизоляция салона материалами Comfort Mat",
     className: "min-h-[300px] md:col-span-6 lg:col-span-4",
     art: (
       <svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" className={artClass}>
@@ -237,6 +265,8 @@ const salonServices: readonly ServiceCardData[] = [
     tag: "Уход",
     copy: "Чистка, защита и восстановление кожаных и пластиковых элементов.",
     chips: ["Кожа", "Пластик"],
+    image: serviceRestore,
+    imageAlt: "Реставрация кожи салона до и после",
     className: "min-h-60 md:col-span-12 lg:col-span-4 lg:min-h-[300px]",
     art: (
       <svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" className={artClass}>

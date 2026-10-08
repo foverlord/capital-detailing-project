@@ -5,7 +5,10 @@ import bmw from "@/assets/gallery-bmw.jpg";
 import zeekr from "@/assets/gallery-zeekr.jpg";
 import hyundaiGloss from "@/assets/gallery-hyundai-gloss.jpg";
 import hyundaiMatte from "@/assets/gallery-hyundai-matte.jpg";
-import salon from "@/assets/gallery-salon.jpg";
+import hilux from "@/assets/gallery-hilux.png";
+import camry from "@/assets/gallery-camry.png";
+import palisade from "@/assets/gallery-palisade.png";
+import bmwE38 from "@/assets/gallery-bmw-e38.png";
 export const heroLightsImage = heroLights;
 export const heroCarImage = heroCar;
 
@@ -55,10 +58,31 @@ export const galleryImages: readonly GalleryWork[] = [
     tags: ["Матовая защита"],
   },
   {
-    src: salon,
-    title: "KIA Sportage",
-    detail: "Детейлинг салона",
-    alt: "Салон KIA Sportage после детейлинга",
-    tags: ["Салон"],
+    src: hilux,
+    title: "Toyota Hilux",
+    detail: "Полировка · глянцевая защита",
+    alt: "Toyota Hilux после полировки и глянцевой защиты кузова",
+    tags: ["Полировка", "Глянец"],
+  },
+  {
+    src: camry,
+    title: "Toyota Camry",
+    detail: "Керамика · глубокий глянец",
+    alt: "Чёрная Toyota Camry с керамической защитой в студии Capital Detailing",
+    tags: ["Керамика", "Глянец"],
+  },
+  {
+    src: palisade,
+    title: "Hyundai Palisade",
+    detail: "PPF · полный кузов",
+    alt: "Белый Hyundai Palisade после полной оклейки защитной плёнкой",
+    tags: ["Full PPF"],
+  },
+  {
+    src: bmwE38,
+    title: "BMW 7 Series",
+    detail: "Восстановление лака · полировка",
+    alt: "Серебристый BMW 7 Series после восстановительной полировки",
+    tags: ["Полировка", "Лак"],
   },
 ];

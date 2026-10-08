@@ -64,6 +64,8 @@ export function LeadForm() {
   const variant = getVariant(service, variantId);
   const hasVariants = service.variants.length > 1;
 
+  const [carModel, setCarModel] = useState("");
+  const [carModelError, setCarModelError] = useState(false);
   const [phone, setPhone] = useState("+7");
   const [phoneError, setPhoneError] = useState(false);
   const [trap, setTrap] = useState("");
@@ -80,12 +82,19 @@ export function LeadForm() {
     event.preventDefault();
     if (sending.current) return;
 
-    if (!isCompletePhone(phone)) {
-      setPhoneError(true);
+    const model = carModel.trim();
+    const modelOk = model.length >= 2 && model.length <= 80;
+    const phoneOk = isCompletePhone(phone);
+    setCarModelError(!modelOk);
+    setPhoneError(!phoneOk);
+    if (!modelOk) {
+      document.getElementById("lead-car-model")?.focus();
+      return;
+    }
+    if (!phoneOk) {
       document.getElementById("lead-phone")?.focus();
       return;
     }
-    setPhoneError(false);
 
     // Hidden trap field is filled only by bots: look successful, send nothing.
     if (trap.trim() !== "") {
@@ -99,7 +108,9 @@ export function LeadForm() {
       bodyClass,
       serviceId: service.id,
       variantId: variant.id,
+      carModel: model,
       phone: normalizePhone(phone),
+      hp: trap,
     })
       .then(() => setStatus("success"))
       .catch(() => setStatus("error"))
@@ -109,7 +120,8 @@ export function LeadForm() {
   };
 
   const submitting = status === "submitting";
-  const phoneStep = hasVariants ? 4 : 3;
+  const modelStep = hasVariants ? 4 : 3;
+  const phoneStep = modelStep + 1;
 
   return (
     <section id="booking" className="border-y border-zinc-800/80 bg-zinc-950">
@@ -140,7 +152,7 @@ export function LeadForm() {
               <Check />
             </span>
             <p className="max-w-sm text-lg font-medium leading-snug text-zinc-100">
-              Заявка принята. Перезвоним в рабочее время, ежедневно с 10:00 до 20:00
+              Спасибо! Перезвоним в течение 20 минут
             </p>
             <Button
               variant="glass"
@@ -148,6 +160,8 @@ export function LeadForm() {
               type="button"
               onClick={() => {
                 setStatus("idle");
+                setCarModel("");
+                setCarModelError(false);
                 setPhone("+7");
                 setPhoneError(false);
                 setTrap("");
@@ -218,6 +232,35 @@ export function LeadForm() {
             ) : null}
 
             <div className="flex flex-col gap-2">
+              <label htmlFor="lead-car-model" className="text-sm font-medium text-zinc-200">
+                {modelStep}. Марка и модель
+              </label>
+              <Input
+                id="lead-car-model"
+                name="carModel"
+                type="text"
+                autoComplete="off"
+                required
+                maxLength={80}
+                value={carModel}
+                placeholder="Например, Toyota Camry"
+                disabled={submitting}
+                onChange={(event) => {
+                  setCarModel(event.target.value);
+                  setCarModelError(false);
+                }}
+                aria-invalid={carModelError ? true : undefined}
+                aria-describedby={carModelError ? "lead-car-model-error" : undefined}
+                className="h-12"
+              />
+              {carModelError ? (
+                <p id="lead-car-model-error" className="m-0 text-sm text-destructive">
+                  Укажите марку и модель, например Toyota Camry
+                </p>
+              ) : null}
+            </div>
+
+            <div className="flex flex-col gap-2">
               <label htmlFor="lead-phone" className="text-sm font-medium text-zinc-200">
                 {phoneStep}. Телефон
               </label>
@@ -230,6 +273,7 @@ export function LeadForm() {
                 required
                 value={phone}
                 placeholder={PHONE_PLACEHOLDER}
+                disabled={submitting}
                 onChange={(event) => {
                   setPhone((previous) => nextPhoneValue(previous, event.target.value));
                   setPhoneError(false);
