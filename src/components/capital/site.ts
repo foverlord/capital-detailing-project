@@ -5,19 +5,22 @@ import type { BodyClassId } from "./pricing";
 const gisMap = {
   orgId: "70000001054354013",
   city: "astana",
-  lat: 51.1282,
-  lon: 71.4304,
-  zoom: 16,
+  /** From https://2gis.kz/astana/firm/70000001054354013?m=71.438782,51.097421/17.43 */
+  lat: 51.097421,
+  lon: 71.438782,
+  zoom: 17.43,
 } as const;
 
-/** Interactive 2GIS map widget for the contacts section (widgets.2gis.com). */
-export function getGisWidgetEmbedUrl(): string {
-  const options = {
+/** Config for the official DGWidgetLoader embed (shows org marker on the map). */
+export function getGisWidgetLoaderConfig(width: number, height: number) {
+  return {
+    width,
+    height,
+    borderColor: "#27272a",
     pos: { lat: gisMap.lat, lon: gisMap.lon, zoom: gisMap.zoom },
     opt: { city: gisMap.city },
-    org: gisMap.orgId,
-  };
-  return `https://widgets.2gis.com/widget?type=firmsonmap&options=${encodeURIComponent(JSON.stringify(options))}`;
+    org: [{ id: gisMap.orgId }],
+  } as const;
 }
 
 export const studio = {
@@ -34,7 +37,7 @@ export const studio = {
   reviewCount: "128+",
   warranty: "5 лет гарантии",
   films: "STEK / SunTek",
-  gisFirmUrl: `https://2gis.kz/astana/firm/${gisMap.orgId}`,
+  gisFirmUrl: `https://2gis.kz/astana/firm/${gisMap.orgId}?m=${gisMap.lon}%2C${gisMap.lat}%2F${gisMap.zoom}`,
   gisRouteUrl: `https://2gis.kz/astana/directions/points/|${gisMap.lon},${gisMap.lat}`,
 } as const;
 
