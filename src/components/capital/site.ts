@@ -4,7 +4,8 @@ import type { BodyClassId } from "./pricing";
 
 const gisMap = {
   orgId: "70000001054354013",
-  city: "astana",
+  /** Widget catalog still uses the old region code; "astana" falls back to Moscow. */
+  city: "nur_sultan",
   /** From https://2gis.kz/astana/firm/70000001054354013?m=71.438782,51.097421/17.43 */
   lat: 51.097421,
   lon: 71.438782,
