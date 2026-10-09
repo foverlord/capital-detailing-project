@@ -21,27 +21,26 @@ function RatingStars() {
 
 export function Hero() {
   return (
-    <section id="top" className="bg-[#101115]">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-10 sm:px-8 lg:grid lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:items-start lg:gap-6 lg:px-14 lg:py-8">
-        <div className="contents lg:block lg:min-w-0 lg:pt-32">
-          <div className="@container order-1 min-w-0">
-            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-400">
+    <section id="top" className="scroll-mt-16 bg-[#101115]">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-10 sm:px-8 lg:grid lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:grid-rows-[auto_auto] lg:items-start lg:gap-6 lg:px-14 lg:py-8">
+        <div className="@container order-1 min-w-0 lg:col-start-1 lg:row-start-1 lg:pt-32">
+          <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-400">
               Астана · студия защиты авто
-            </p>
-            <h1 className="mt-5 font-display text-[clamp(2.05rem,12cqw,5.15rem)] font-black uppercase leading-[0.86] tracking-[-0.045em] text-white">
-              Защита и
-              <br />
-              <span className="text-[#d0b898]">эстетика</span>
-              <br />
-              авто в Астане
-            </h1>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-400">
-              Оклейка PPF, полировка и шумоизоляция — от городских седанов до кроссоверов и
-              спорткаров
-            </p>
-          </div>
-          <div className="order-3 min-w-0">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:mt-8">
+          </p>
+          <h1 className="mt-5 font-display text-[clamp(2.05rem,12cqw,5.15rem)] font-black uppercase leading-[0.86] tracking-[-0.045em] text-white">
+            Защита и
+            <br />
+            <span className="text-[#d0b898]">эстетика</span>
+            <br />
+            авто в Астане
+          </h1>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-400">
+            Оклейка PPF, полировка и шумоизоляция — от городских седанов до кроссоверов и
+            спорткаров
+          </p>
+        </div>
+        <div className="order-3 min-w-0 lg:col-start-1 lg:row-start-2">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:mt-8">
               <a
                 href="#booking"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-100"
@@ -96,10 +95,9 @@ export function Hero() {
                 </dd>
               </div>
             </dl>
-          </div>
         </div>
 
-        <div className="order-2 flex min-w-0 flex-col items-center bg-[#101115] lg:order-none">
+        <div className="order-2 flex min-w-0 flex-col items-center bg-[#101115] lg:col-start-2 lg:row-span-2 lg:row-start-1">
           <div className="w-full bg-[#101115]">
             <img
               src={heroLightsImage}
@@ -107,11 +105,11 @@ export function Hero() {
               className="h-auto w-full"
             />
           </div>
-          <div className="mt-2 w-full bg-[#101115]">
+          <div className="mt-2 w-full overflow-hidden bg-[#101115]">
             <img
               src={heroCarImage}
               alt="Чёрный Mercedes-Benz G-Class"
-              className="h-auto w-[107%]"
+              className="h-auto w-[107%] max-w-none"
             />
           </div>
         </div>

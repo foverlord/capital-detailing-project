@@ -109,11 +109,14 @@
     letter-spacing: 0;
     margin: 0;
     min-width: 320px;
+    overflow-x: clip;
   }
 
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 4.5rem;
+    overflow-x: clip;
+    overscroll-behavior-y: contain;
   }
   button,
   a,
