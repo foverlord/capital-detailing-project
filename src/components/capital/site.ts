@@ -11,16 +11,14 @@ const gisMap = {
   zoom: 17.43,
 } as const;
 
-/** Config for the official DGWidgetLoader embed (shows org marker on the map). */
-export function getGisWidgetLoaderConfig(width: number, height: number) {
-  return {
-    width,
-    height,
-    borderColor: "#27272a",
+/** Isolated iframe URL. Never inject DGWidgetLoader into the page: it calls document.write. */
+export function getGisWidgetEmbedUrl(): string {
+  const options = {
     pos: { lat: gisMap.lat, lon: gisMap.lon, zoom: gisMap.zoom },
     opt: { city: gisMap.city },
     org: [{ id: gisMap.orgId }],
-  } as const;
+  };
+  return `https://widgets.2gis.com/widget?type=firmsonmap&options=${encodeURIComponent(JSON.stringify(options))}`;
 }
 
 export const studio = {

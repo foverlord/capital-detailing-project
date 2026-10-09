@@ -2,8 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "./FadeIn";
 import { Accent } from "./SectionHeading";
-import { GisMapEmbed } from "./GisMapEmbed";
-import { studio } from "./site";
+import { getGisWidgetEmbedUrl, studio } from "./site";
 
 export function Contacts() {
   return (
@@ -70,7 +69,12 @@ export function Contacts() {
               {studio.addressLines[0]}
             </p>
           </div>
-          <GisMapEmbed />
+          <iframe
+            title="Capital Detailing на карте 2ГИС"
+            src={getGisWidgetEmbedUrl()}
+            className="min-h-[320px] w-full flex-1 border-0 bg-[#101115]"
+            loading="lazy"
+          />
         </div>
       </FadeIn>
     </section>
