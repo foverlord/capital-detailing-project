@@ -8,15 +8,17 @@ import { Portfolio } from "./Portfolio";
 import { QuoteProvider } from "./quote-context";
 import { ServicesBento } from "./ServicesBento";
 import { Standards } from "./Standards";
+import { MobileScrollFix } from "./MobileScrollFix";
 import { StickyBar } from "./StickyBar";
 
 export function LandingPage() {
   return (
     <MotionConfig reducedMotion="user">
       <QuoteProvider>
-        <div className="min-h-screen bg-zinc-950 pb-28 text-zinc-100 md:pb-0">
+        <div className="min-h-dvh bg-zinc-950 pb-28 text-zinc-100 md:min-h-screen md:pb-0">
+          <MobileScrollFix />
           <Navbar />
-          <main className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-0">
+          <main>
             <Hero />
             <LeadForm />
             <ServicesBento />

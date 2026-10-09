@@ -119,6 +119,16 @@
     overflow-x: clip;
     overscroll-behavior-y: none;
   }
+
+  @media (max-width: 767px) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    body {
+      touch-action: pan-y;
+    }
+  }
   button,
   a,
   input,

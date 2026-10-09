@@ -21,13 +21,13 @@ function RatingStars() {
 
 export function Hero() {
   return (
-    <section id="top" className="scroll-mt-16 bg-[#101115]">
+    <section id="top" className="scroll-mt-16 overflow-anchor-none bg-[#101115]">
       <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-10 sm:px-8 lg:grid lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:grid-rows-[auto_auto] lg:items-start lg:gap-6 lg:px-14 lg:py-8">
         <div className="@container order-1 min-w-0 overflow-visible lg:col-start-1 lg:row-start-1 lg:pt-32">
           <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-400">
             Астана · студия защиты авто
           </p>
-          <h1 className="mt-5 font-display text-[clamp(2.05rem,10.5vw,5.15rem)] font-black uppercase leading-[0.92] tracking-[-0.045em] text-white lg:text-[clamp(2.05rem,12cqw,5.15rem)] lg:leading-[0.86]">
+          <h1 className="mt-5 pt-0.5 font-display text-[clamp(2.05rem,10.5vw,5.15rem)] font-black uppercase leading-[0.95] tracking-[-0.045em] text-white lg:pt-0 lg:text-[clamp(2.05rem,12cqw,5.15rem)] lg:leading-[0.86]">
             Защита и
             <br />
             <span className="text-[#d0b898]">эстетика</span>
@@ -109,7 +109,9 @@ export function Hero() {
             <img
               src={heroCarImage}
               alt="Чёрный Mercedes-Benz G-Class"
-              className="mx-auto h-auto w-full max-w-full lg:w-[107%] lg:max-w-none"
+              className="mx-auto block h-auto w-full max-w-full overflow-anchor-none lg:w-[107%] lg:max-w-none"
+              decoding="async"
+              fetchPriority="high"
             />
           </div>
         </div>
