@@ -16,7 +16,7 @@ export function LandingPage() {
       <QuoteProvider>
         <div className="min-h-screen bg-zinc-950 pb-28 text-zinc-100 md:pb-0">
           <Navbar />
-          <main>
+          <main className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-0">
             <Hero />
             <LeadForm />
             <ServicesBento />

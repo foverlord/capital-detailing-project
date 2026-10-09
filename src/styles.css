@@ -110,13 +110,14 @@
     margin: 0;
     min-width: 320px;
     overflow-x: clip;
+    overscroll-behavior-y: none;
   }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4.5rem;
+    scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px));
     overflow-x: clip;
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: none;
   }
   button,
   a,

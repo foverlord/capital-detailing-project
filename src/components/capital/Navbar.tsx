@@ -7,7 +7,7 @@ export function Navbar() {
   const close = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#101115]/95 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#101115] pt-[env(safe-area-inset-top,0px)] md:sticky md:bg-[#101115]/95 md:backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-14">
         <a href="#top" className="flex min-w-0 items-center gap-2.5" onClick={close}>
           <span className="grid size-8 shrink-0 place-items-center rounded-md border border-zinc-500/80 text-[10px] font-semibold tracking-wide text-zinc-100">
