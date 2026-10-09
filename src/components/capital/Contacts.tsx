@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "./FadeIn";
 import { Accent } from "./SectionHeading";
-import { studio } from "./site";
+import { getGisWidgetEmbedUrl, studio } from "./site";
 
 export function Contacts() {
   return (
@@ -62,12 +62,20 @@ export function Contacts() {
             </Button>
           </div>
         </div>
-        <div className="flex min-h-72 flex-col justify-end gap-3 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 backdrop-blur-md">
-          <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">2ГИС</p>
-          <p className="text-2xl font-semibold tracking-tight text-zinc-100">Бухар жырау, 36н</p>
-          <p className="max-w-xs text-sm leading-6 text-zinc-400">
-            Карточка студии и маршрут открываются в 2ГИС. Координаты филиала уже стоят в кнопках.
-          </p>
+        <div className="flex min-h-[22rem] flex-col overflow-hidden rounded-xl border border-zinc-800/80 bg-zinc-900/40">
+          <div className="flex flex-col gap-1 border-b border-zinc-800/80 px-4 py-3">
+            <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">2ГИС</p>
+            <p className="text-base font-semibold tracking-tight text-zinc-100">
+              {studio.addressLines[0]}
+            </p>
+          </div>
+          <iframe
+            title="Capital Detailing на карте 2ГИС"
+            src={getGisWidgetEmbedUrl()}
+            className="min-h-[280px] w-full flex-1 border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </FadeIn>
     </section>

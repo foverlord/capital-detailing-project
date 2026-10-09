@@ -2,6 +2,24 @@ import type { BodyClassId } from "./pricing";
 
 /** Studio facts. Phone and WhatsApp are the studio line. */
 
+const gisMap = {
+  orgId: "70000001054354013",
+  city: "astana",
+  lat: 51.1282,
+  lon: 71.4304,
+  zoom: 16,
+} as const;
+
+/** Interactive 2GIS map widget for the contacts section (widgets.2gis.com). */
+export function getGisWidgetEmbedUrl(): string {
+  const options = {
+    pos: { lat: gisMap.lat, lon: gisMap.lon, zoom: gisMap.zoom },
+    opt: { city: gisMap.city },
+    org: gisMap.orgId,
+  };
+  return `https://widgets.2gis.com/widget?type=firmsonmap&options=${encodeURIComponent(JSON.stringify(options))}`;
+}
+
 export const studio = {
   name: "Capital Detailing",
   logo: "CD CAPITAL DETAILING",
@@ -16,8 +34,8 @@ export const studio = {
   reviewCount: "128+",
   warranty: "5 лет гарантии",
   films: "STEK / SunTek",
-  gisFirmUrl: "https://2gis.kz/astana/firm/70000001054354013",
-  gisRouteUrl: "https://2gis.kz/astana/directions/points/|71.4304,51.1282",
+  gisFirmUrl: `https://2gis.kz/astana/firm/${gisMap.orgId}`,
+  gisRouteUrl: `https://2gis.kz/astana/directions/points/|${gisMap.lon},${gisMap.lat}`,
 } as const;
 
 export interface NavLink {
