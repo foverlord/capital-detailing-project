@@ -14,9 +14,9 @@ const gisMap = {
 /** Isolated iframe URL. Never inject DGWidgetLoader into the page: it calls document.write. */
 export function getGisWidgetEmbedUrl(): string {
   const options = {
-    pos: { lat: gisMap.lat, lon: gisMap.lon, zoom: gisMap.zoom },
+    pos: { lat: gisMap.lat, lon: gisMap.lon, zoom: 17 },
     opt: { city: gisMap.city },
-    org: [{ id: gisMap.orgId }],
+    org: gisMap.orgId,
   };
   return `https://widgets.2gis.com/widget?type=firmsonmap&options=${encodeURIComponent(JSON.stringify(options))}`;
 }
