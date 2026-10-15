@@ -1,8 +1,16 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "./FadeIn";
 import { Accent } from "./SectionHeading";
 import { getGisWidgetEmbedUrl, studio } from "./site";
+
+/** Empty when the file is not in the repo yet, so the build still succeeds. */
+const mapAstanaModules = import.meta.glob("../../assets/map-astana.png", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+const mapAstanaSrc = Object.values(mapAstanaModules)[0];
 
 export function Contacts() {
   return (
@@ -72,9 +80,34 @@ export function Contacts() {
           <iframe
             title="Capital Detailing на карте 2ГИС"
             src={getGisWidgetEmbedUrl()}
-            className="min-h-[320px] w-full flex-1 border-0 bg-[#101115]"
+            className="hidden min-h-[320px] w-full flex-1 border-0 bg-[#101115] md:block"
             loading="lazy"
           />
+          <a
+            href={studio.gisFirmUrl}
+            target="_blank"
+            rel="noopener"
+            aria-label="Открыть Capital Detailing в 2ГИС"
+            className="relative min-h-[320px] w-full flex-1 overflow-hidden bg-[#1a1b20] md:hidden"
+          >
+            {mapAstanaSrc ? (
+              <img
+                src={mapAstanaSrc}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : null}
+            <span className="absolute inset-0 bg-black/40" aria-hidden="true" />
+            <span className="relative flex h-full min-h-[320px] flex-col items-center justify-center gap-2 px-4 text-center">
+              <MapPin className="size-8 text-zinc-100" aria-hidden="true" />
+              <span className="text-base font-semibold text-zinc-100">
+                {studio.addressLines[0]}
+              </span>
+              <span className="mt-3 inline-flex min-h-10 items-center rounded-md border border-white/20 bg-white/10 px-4 text-sm font-medium text-zinc-100">
+                Посмотреть на карте Астаны
+              </span>
+            </span>
+          </a>
         </div>
       </FadeIn>
     </section>
